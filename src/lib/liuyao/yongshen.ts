@@ -78,7 +78,7 @@ export const QUESTION_SUBTYPES: Record<QuestionCategory, QuestionSubType[]> = {
 export function selectYongShen(
   yaoInfos: YaoInfo[],
   questionSubType: string,
-  gender?: 'male' | 'female',
+  gender?: 'male' | 'female' | 'same_sex',
 ): YongShenInfo {
   const rule = YONG_SHEN_RULES[questionSubType];
 
