@@ -35,6 +35,7 @@ export const QUESTION_SUBTYPES: Record<QuestionCategory, QuestionSubType[]> = {
   'love': [
     { category: 'love', subType: 'love_male', description: '男问婚恋' },
     { category: 'love', subType: 'love_female', description: '女问婚恋' },
+    { category: 'love', subType: 'love_samesex', description: '同性感情' },
     { category: 'love', subType: 'love_relationship', description: '感情发展' },
   ],
   'wealth': [

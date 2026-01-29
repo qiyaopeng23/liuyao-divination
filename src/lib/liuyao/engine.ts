@@ -203,9 +203,12 @@ export function castHexagram(input: CastingInput): DivinationResult {
 /**
  * 获取问事类别的默认细分类型
  */
-function getDefaultSubType(category: QuestionCategory, gender?: 'male' | 'female'): string {
+function getDefaultSubType(category: QuestionCategory, gender?: 'male' | 'female' | 'same_sex'): string {
   // 感情类问题根据性别选择不同的用神
   if (category === 'love') {
+    if (gender === 'same_sex') {
+      return 'love_samesex';  // 同性感情以应爻为对方
+    }
     if (gender === 'female') {
       return 'love_female';  // 女问婚恋以官鬼为用神
     }

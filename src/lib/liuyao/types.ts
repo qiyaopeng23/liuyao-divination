@@ -355,6 +355,9 @@ export interface CausalNode {
 /** 起卦方法 */
 export type CastingMethod = 'coin' | 'time' | 'manual';
 
+/** 性别选项（用于感情类问题） */
+export type GenderOption = 'male' | 'female' | 'same_sex';
+
 /** 起卦输入 */
 export interface CastingInput {
   /** 起卦方法 */
@@ -368,7 +371,7 @@ export interface CastingInput {
   /** 问事内容（可选，不存储） */
   questionText?: string;
   /** 性别（用于感情类问题） */
-  gender?: 'male' | 'female';
+  gender?: GenderOption;
 }
 
 /** 完整的卦例结果 */

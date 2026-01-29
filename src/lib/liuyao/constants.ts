@@ -401,6 +401,7 @@ export const YONG_SHEN_RULES: Record<string, { primary: YongShenTarget; secondar
   // 感情婚姻
   'love_male': { primary: '妻财', description: '男问婚姻以妻财为用神' },
   'love_female': { primary: '官鬼', description: '女问婚姻以官鬼为用神' },
+  'love_samesex': { primary: '应爻', secondary: '世爻', description: '同性感情以应爻为对方（代表伴侣）' },
   'love_relationship': { primary: '应爻', secondary: '世爻', description: '问感情发展以应爻为对方' },
 
   // 财运

@@ -337,3 +337,118 @@ export function getDiZhiIndex(zhi: DiZhi): number {
 export function getTianGanIndex(gan: TianGan): number {
   return TIAN_GAN.indexOf(gan);
 }
+
+/**
+ * 查找从指定日期开始，未来N天内所有指定地支的日期
+ *
+ * @param startDate 开始日期
+ * @param targetZhi 目标地支
+ * @param maxDays 最大查找天数（默认180天，约6个月）
+ * @returns 符合条件的日期数组
+ */
+export function findFutureDatesWithZhi(
+  startDate: Date,
+  targetZhi: DiZhi,
+  maxDays: number = 180,
+): Date[] {
+  const results: Date[] = [];
+  const targetZhiIndex = DI_ZHI.indexOf(targetZhi);
+
+  for (let i = 1; i <= maxDays; i++) {
+    const checkDate = new Date(startDate.getTime() + i * 24 * 60 * 60 * 1000);
+    const dayGanZhi = getDayGanZhi(checkDate);
+    const dayZhiIndex = DI_ZHI.indexOf(dayGanZhi.zhi);
+
+    if (dayZhiIndex === targetZhiIndex) {
+      results.push(checkDate);
+    }
+  }
+
+  return results;
+}
+
+/**
+ * 查找未来N个月内指定地支的月份
+ *
+ * @param startDate 开始日期
+ * @param targetZhi 目标地支
+ * @param maxMonths 最大查找月数（默认12个月）
+ * @returns 符合条件的月份信息数组
+ */
+export function findFutureMonthsWithZhi(
+  startDate: Date,
+  targetZhi: DiZhi,
+  maxMonths: number = 12,
+): Array<{ year: number; month: number; startDate: Date; endDate: Date }> {
+  const results: Array<{ year: number; month: number; startDate: Date; endDate: Date }> = [];
+  const targetZhiIndex = DI_ZHI.indexOf(targetZhi);
+
+  let checkDate = new Date(startDate);
+
+  for (let i = 0; i < maxMonths; i++) {
+    // 往后推一个月
+    checkDate = new Date(checkDate.getFullYear(), checkDate.getMonth() + 1, 15);
+
+    const monthGanZhi = getMonthGanZhi(checkDate);
+    const monthZhiIndex = DI_ZHI.indexOf(monthGanZhi.zhi);
+
+    if (monthZhiIndex === targetZhiIndex) {
+      // 计算这个月的大致起止日期
+      const jqIndex = (targetZhiIndex - 2 + 12) % 12; // 寅月=0
+      const [, jqMonth, jqDay] = JIE_QI_APPROX[jqIndex];
+
+      // 节气月的开始和结束
+      let startYear = checkDate.getFullYear();
+      let endYear = checkDate.getFullYear();
+
+      // 处理跨年情况
+      if (jqMonth === 1 && checkDate.getMonth() > 6) {
+        startYear = checkDate.getFullYear() + 1;
+        endYear = checkDate.getFullYear() + 1;
+      } else if (jqMonth === 12 && checkDate.getMonth() < 6) {
+        startYear = checkDate.getFullYear() - 1;
+        endYear = checkDate.getFullYear();
+      }
+
+      const monthStart = new Date(startYear, jqMonth - 1, jqDay);
+      const nextJqIndex = (jqIndex + 1) % 12;
+      const [, nextJqMonth, nextJqDay] = JIE_QI_APPROX[nextJqIndex];
+
+      let nextStartYear = startYear;
+      if (nextJqMonth < jqMonth) {
+        nextStartYear = startYear + 1;
+      }
+      const monthEnd = new Date(nextStartYear, nextJqMonth - 1, nextJqDay - 1);
+
+      results.push({
+        year: startYear,
+        month: jqMonth,
+        startDate: monthStart,
+        endDate: monthEnd,
+      });
+    }
+  }
+
+  return results;
+}
+
+/**
+ * 格式化日期为中文
+ */
+export function formatDateChinese(date: Date): string {
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  return `${year}年${month}月${day}日`;
+}
+
+/**
+ * 格式化日期为简短格式
+ */
+export function formatDateShort(date: Date): string {
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const weekDays = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
+  const weekDay = weekDays[date.getDay()];
+  return `${month}月${day}日(${weekDay})`;
+}

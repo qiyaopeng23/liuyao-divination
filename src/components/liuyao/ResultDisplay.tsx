@@ -478,34 +478,42 @@ export const ResultDisplay: React.FC<ResultDisplayProps> = ({ result, className 
               时间预测
             </CardTitle>
             <p className="text-sm text-muted-foreground">
-              以下是可能的应验时间窗口（仅供参考）
+              以下是可能出现结果的时间窗口（仅供参考）
             </p>
           </CardHeader>
           <CardContent>
-            <div className="space-y-3">
+            <div className="space-y-4">
               {result.interpretation.timingPredictions.map((timing, index) => (
                 <div
                   key={index}
-                  className="p-3 border rounded-lg space-y-1"
+                  className="p-4 border rounded-lg space-y-2 bg-muted/30"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="font-medium">{timing.timeWindow}</span>
+                    <span className="font-medium text-primary">{timing.timeWindow}</span>
                     <span
                       className={cn(
                         'text-xs px-2 py-0.5 rounded',
-                        timing.confidence === 'high' && 'bg-green-100 text-green-700',
-                        timing.confidence === 'medium' && 'bg-blue-100 text-blue-700',
-                        timing.confidence === 'low' && 'bg-gray-100 text-gray-600'
+                        timing.confidence === 'high' && 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400',
+                        timing.confidence === 'medium' && 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400',
+                        timing.confidence === 'low' && 'bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400'
                       )}
                     >
                       {timing.confidence === 'high' ? '可能性较高' :
-                       timing.confidence === 'medium' ? '可能' : '参考'}
+                       timing.confidence === 'medium' ? '参考' : '仅供参考'}
                     </span>
                   </div>
-                  <p className="text-sm text-muted-foreground">{timing.basis}</p>
+                  <p className="text-sm">{timing.basis}</p>
+                  {!isExpertMode && timing.reasoning.steps[0]?.ruleDescription && (
+                    <p className="text-xs text-muted-foreground border-t pt-2 mt-2">
+                      💡 {timing.reasoning.steps[0].ruleDescription}
+                    </p>
+                  )}
                 </div>
               ))}
             </div>
+            <p className="text-xs text-muted-foreground mt-4 p-2 bg-amber-50 dark:bg-amber-900/20 rounded border border-amber-200 dark:border-amber-800">
+              ⚠️ 应期预测是六爻中最难的部分，以上日期仅作参考。实际应验时间可能有偏差，请结合具体情况判断。
+            </p>
           </CardContent>
         </Card>
       )}

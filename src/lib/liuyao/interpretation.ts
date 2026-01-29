@@ -18,6 +18,7 @@ import { getWorldYao, getResponseYao, findYaoByLiuQin } from './najia';
 import { analyzeProsperity, getProsperityLevel } from './prosperity';
 import { LIU_SHEN_MEANINGS } from './liushen';
 import { DI_ZHI_CHONG, DI_ZHI } from './constants';
+import { findFutureDatesWithZhi, findFutureMonthsWithZhi, formatDateShort, formatDateChinese } from './ganzhi';
 
 /**
  * 生成完整解卦结果
@@ -343,29 +344,40 @@ function analyzeMovingYao(
 
     let analysis = `${movingYao.position}爻${movingYao.liuQin}${movingYao.diZhi}动`;
     let plainAnalysis = '';
+    const isYongShen = yongShen.positions.includes(movingYao.position);
+    const yaoRole = isYongShen ? '关键因素' : `${movingYao.position}爻（${getLiuQinPlainName(movingYao.liuQin)}）`;
 
     // 判断变化类型
     if (changedYao.changeType === 'return_birth') {
       analysis += '，化回头生';
-      plainAnalysis = '变化带来帮助';
+      plainAnalysis = `${yaoRole}正在变化，而且变化后会得到帮助（化回头生）。这意味着：虽然过程中可能有波折，但最终会有好的结果，事情会朝有利方向发展`;
     } else if (changedYao.changeType === 'return_clash') {
       analysis += '，化回头克';
-      plainAnalysis = '变化带来阻力';
+      plainAnalysis = `${yaoRole}正在变化，但变化后反而受阻（化回头克）。这意味着：事情在发展过程中可能会遇到反转，原本看好的情况可能会变差，需要谨慎`;
     } else if (changedYao.changeType === 'advance') {
       analysis += '，化进神';
-      plainAnalysis = '往好的方向发展';
+      plainAnalysis = `${yaoRole}正在变化，而且是往前进的方向（化进神）。这意味着：事情在持续向好发展，力量在增强，趋势是积极的`;
     } else if (changedYao.changeType === 'retreat') {
       analysis += '，化退神';
-      plainAnalysis = '力量在减弱';
+      plainAnalysis = `${yaoRole}正在变化，但是在往后退的方向（化退神）。这意味着：力量在逐渐减弱，事情可能会退步或收缩，需要注意防守`;
+    } else if (changedYao.changeType === 'to_void') {
+      analysis += '，化空';
+      plainAnalysis = `${yaoRole}正在变化，但变化后会落空（化空）。这意味着：变化的结果可能不太实在，承诺或计划可能难以兑现`;
+    } else if (changedYao.changeType === 'to_tomb') {
+      analysis += '，化墓';
+      plainAnalysis = `${yaoRole}正在变化，但变化后会受困（化墓）。这意味着：事情可能会陷入停滞或困境，发展受到限制`;
+    } else if (changedYao.changeType === 'to_bindingend') {
+      analysis += '，化绝';
+      plainAnalysis = `${yaoRole}正在变化，但变化后力量会耗尽（化绝）。这意味着：事情可能会走向终结或中断，需要特别注意`;
     } else {
       analysis += `，化${changedYao.liuQin}${changedYao.diZhi}`;
-      plainAnalysis = '正在发生变化';
+      const changedRole = getLiuQinPlainName(changedYao.liuQin);
+      plainAnalysis = `${yaoRole}正在变化，变成了${changedRole}的性质。这意味着：事情的属性正在转变，${getChangeImplication(movingYao.liuQin, changedYao.liuQin)}`;
     }
 
-    // 判断是否影响用神
-    if (yongShen.positions.includes(movingYao.position)) {
+    // 添加用神标记
+    if (isYongShen) {
       analysis += '（用神发动）';
-      plainAnalysis = '关键因素' + plainAnalysis;
     }
 
     analyses.push(analysis);
@@ -399,6 +411,78 @@ function analyzeMovingYao(
 }
 
 /**
+ * 获取关系的详细白话解释
+ */
+function getRelationPlainExplanation(
+  relation: RelationAnalysis,
+  yongShen: YongShenInfo,
+  yaoInfos: YaoInfo[],
+): string {
+  const parties = relation.parties;
+
+  // 判断是否涉及用神
+  const involvesYongShen = yongShen.positions.some(pos =>
+    parties.some(p => p.includes(`${pos}爻`))
+  );
+
+  // 判断是否涉及世爻或应爻
+  const involvesWorld = parties.some(p => p.includes('世爻'));
+  const involvesResponse = parties.some(p => p.includes('应爻'));
+  const involvesDay = parties.some(p => p.includes('日辰') || p.includes('日'));
+  const involvesMonth = parties.some(p => p.includes('月建') || p.includes('月'));
+
+  if (relation.type === 'six_clash') {
+    // 六冲的详细解释
+    if (involvesYongShen && involvesDay) {
+      return `关键因素与当天的时机形成冲突（六冲），意味着：目前环境对事情发展有阻碍，可能会有变动或延迟。这种冲击是暂时的，过了这个时间节点情况会有变化`;
+    }
+    if (involvesYongShen && involvesMonth) {
+      return `关键因素与当月大环境形成冲突（六冲），意味着：这段时间整体环境不太配合，事情推进会遇到较大阻力。建议耐心等待环境变化`;
+    }
+    if (involvesWorld && involvesResponse) {
+      return `你的位置（世爻）和外部/对方（应爻）形成冲突，意味着：双方存在分歧或竞争关系，不容易达成一致。可能需要调整期望或换个方式沟通`;
+    }
+    if (involvesYongShen) {
+      return `关键因素受到冲击（六冲），意味着：事情正在发生变化，原有的稳定状态可能被打破。变化是双刃剑，可能带来机会，也可能带来挑战`;
+    }
+    // 普通的冲
+    return `${parties.join('和')}形成冲突关系，意味着：这两个因素在互相拉扯，可能造成变动或不稳定。冲代表「动」，静态的事情可能开始动起来`;
+  }
+
+  if (relation.type === 'six_harmony') {
+    // 六合的详细解释
+    if (involvesYongShen && involvesDay) {
+      return `关键因素与当天时机形成合（六合），意味着：目前时机有利，环境配合，事情容易顺利推进。不过「合」也有绊住的意思，可能进展会慢一些但比较稳`;
+    }
+    if (involvesYongShen && involvesMonth) {
+      return `关键因素与当月大环境形成合，意味着：这段时间整体环境支持你做这件事，是比较好的时机。事情虽然可能进展不快，但会比较稳当`;
+    }
+    if (involvesWorld && involvesResponse) {
+      return `你的位置（世爻）和外部/对方（应爻）形成合，意味着：双方有合作或相互靠拢的趋势，容易达成共识。感情问题见此则表示双方有缘分`;
+    }
+    if (involvesYongShen) {
+      return `关键因素得到支持（六合），意味着：有利因素在聚集，事情朝好的方向发展。不过合也有「绊」的意思，进展可能稳中偏慢`;
+    }
+    // 普通的合
+    return `${parties.join('和')}形成合的关系，意味着：这两个因素在互相配合、聚拢。合代表「稳」，有利于事情稳定发展，但也可能进展较慢`;
+  }
+
+  if (relation.type === 'three_penalty') {
+    return `存在刑的关系，意味着：内部有矛盾或自我消耗，可能会有反复或波折。刑主不顺，需要特别注意细节和人际关系`;
+  }
+
+  if (relation.type === 'six_harm') {
+    return `存在害的关系，意味着：暗中有不利因素在干扰，看起来顺利的事情可能有隐患。害主暗损，需要防范小人或意外`;
+  }
+
+  if (relation.type === 'destruction') {
+    return `存在破的关系，意味着：原有的结构或计划可能被打破，需要重新调整。破主变故，但也可能是打破僵局的契机`;
+  }
+
+  return relation.description;
+}
+
+/**
  * 分析关系影响
  */
 function analyzeRelationsImpact(
@@ -410,17 +494,11 @@ function analyzeRelationsImpact(
 
   // 筛选重要关系
   const importantRelations = relations.filter(r =>
-    r.type === 'six_clash' || r.type === 'six_harmony'
+    r.type === 'six_clash' || r.type === 'six_harmony' || r.type === 'three_penalty' || r.type === 'six_harm'
   );
 
   for (const relation of importantRelations.slice(0, 3)) { // 最多显示3条
-    let plainText = '';
-
-    if (relation.type === 'six_clash') {
-      plainText = `${relation.parties.join('和')}在互相拉扯，可能造成变动或阻碍`;
-    } else if (relation.type === 'six_harmony') {
-      plainText = `${relation.parties.join('和')}在互相配合，有利于稳定和推进`;
-    }
+    const plainText = getRelationPlainExplanation(relation, yongShen, yaoInfos);
 
     items.push({
       type: relation.impact === 'positive' ? 'support' : relation.impact === 'negative' ? 'obstacle' : 'trend',
@@ -428,10 +506,8 @@ function analyzeRelationsImpact(
       plainText,
       reasoning: {
         steps: [{
-          ruleName: relation.type === 'six_clash' ? '六冲' : '六合',
-          ruleDescription: relation.type === 'six_clash'
-            ? '相冲则动、散'
-            : '相合则聚、绊',
+          ruleName: getRelationTypeName(relation.type),
+          ruleDescription: getRelationTypeDescription(relation.type),
           data: { parties: relation.parties },
           conclusion: relation.description,
           strength: 'medium',
@@ -443,6 +519,36 @@ function analyzeRelationsImpact(
   }
 
   return items;
+}
+
+/**
+ * 获取关系类型名称
+ */
+function getRelationTypeName(type: string): string {
+  const names: Record<string, string> = {
+    'six_clash': '六冲',
+    'six_harmony': '六合',
+    'three_harmony': '三合',
+    'three_penalty': '三刑',
+    'six_harm': '六害',
+    'destruction': '破',
+  };
+  return names[type] || type;
+}
+
+/**
+ * 获取关系类型描述
+ */
+function getRelationTypeDescription(type: string): string {
+  const descriptions: Record<string, string> = {
+    'six_clash': '相冲则动、散，代表变化和冲突',
+    'six_harmony': '相合则聚、绊，代表稳定和配合',
+    'three_harmony': '三合成局，力量增强',
+    'three_penalty': '相刑则伤、损，代表矛盾和消耗',
+    'six_harm': '相害则暗损，代表暗中的不利因素',
+    'destruction': '相破则坏，原有结构被打破',
+  };
+  return descriptions[type] || '';
 }
 
 /**
@@ -519,6 +625,7 @@ function predictTiming(
 ): TimingPrediction[] {
   const predictions: TimingPrediction[] = [];
   const yongShenYao = yaoInfos.find(y => yongShen.positions.includes(y.position));
+  const today = new Date();
 
   if (!yongShenYao) return predictions;
 
@@ -527,15 +634,26 @@ function predictTiming(
     const voidZhi = yongShenYao.diZhi;
     const clashZhi = DI_ZHI_CHONG[voidZhi];
 
+    // 查找未来的具体日期
+    const fillDates = findFutureDatesWithZhi(today, voidZhi, 90).slice(0, 3);
+    const clashDates = findFutureDatesWithZhi(today, clashZhi, 90).slice(0, 3);
+    const allDates = [...fillDates, ...clashDates].sort((a, b) => a.getTime() - b.getTime()).slice(0, 4);
+
+    const dateStrings = allDates.map(d => formatDateShort(d)).join('、');
+    const firstDate = allDates[0];
+    const explanation = firstDate
+      ? `最近的可能时间点：${dateStrings}等。这些是${voidZhi}日（填实出空）或${clashZhi}日（冲空而出）`
+      : `逢${voidZhi}日（填实）或${clashZhi}日（冲空）`;
+
     predictions.push({
-      timeWindow: `逢${voidZhi}日/月（填实）或逢${clashZhi}日/月（冲空）`,
-      basis: '用神空亡，待填实或冲空而出',
+      timeWindow: `用神出空后事情才会有进展`,
+      basis: explanation,
       confidence: 'medium',
       reasoning: {
         steps: [{
           ruleName: '空亡应期',
-          ruleDescription: '空亡之爻逢本支填实或被冲而出空',
-          data: { voidZhi, clashZhi },
+          ruleDescription: '关键因素目前处于"空转"状态，等到相应的日子到来时才会"落地"。填实=遇到相同地支的日子；冲空=遇到对冲地支的日子',
+          data: { voidZhi, clashZhi, nearestDates: allDates.map(d => formatDateChinese(d)) },
           conclusion: `${voidZhi}或${clashZhi}时应验`,
           strength: 'medium',
         }],
@@ -547,16 +665,34 @@ function predictTiming(
 
   // 2. 用神地支对应之时
   if (!yongShenYao.isVoid && !yongShenYao.isDayBroken) {
+    const targetZhi = yongShenYao.diZhi;
+
+    // 查找未来的具体日期
+    const futureDates = findFutureDatesWithZhi(today, targetZhi, 90).slice(0, 4);
+    const futureMonths = findFutureMonthsWithZhi(today, targetZhi, 12).slice(0, 2);
+
+    const dateStrings = futureDates.map(d => formatDateShort(d)).join('、');
+
+    let monthInfo = '';
+    if (futureMonths.length > 0) {
+      const monthNames = futureMonths.map(m => `${m.year}年${m.month}月`).join('、');
+      monthInfo = `；或在${monthNames}左右`;
+    }
+
+    const explanation = futureDates.length > 0
+      ? `最近的${targetZhi}日：${dateStrings}${monthInfo}`
+      : `逢${targetZhi}日/月`;
+
     predictions.push({
-      timeWindow: `逢${yongShenYao.diZhi}日/月`,
-      basis: '用神地支值日值月之时',
+      timeWindow: `关键因素发力的时间`,
+      basis: explanation,
       confidence: 'medium',
       reasoning: {
         steps: [{
           ruleName: '地支应期',
-          ruleDescription: '用神地支当值之时',
-          data: { yaoDiZhi: yongShenYao.diZhi },
-          conclusion: `${yongShenYao.diZhi}时应验`,
+          ruleDescription: `关键因素的地支是"${targetZhi}"，当日期或月份的地支也是"${targetZhi}"时，相当于得到了时间的加持，事情更容易有结果`,
+          data: { yaoDiZhi: targetZhi, nearestDates: futureDates.map(d => formatDateChinese(d)) },
+          conclusion: `${targetZhi}时应验`,
           strength: 'medium',
         }],
         conclusion: '逢本支之时',
@@ -567,16 +703,26 @@ function predictTiming(
 
   // 3. 动爻变化之时
   if (yongShenYao.isMoving && yongShenYao.changedYao) {
+    const changedZhi = yongShenYao.changedYao.diZhi;
+
+    // 查找未来的具体日期
+    const futureDates = findFutureDatesWithZhi(today, changedZhi, 90).slice(0, 3);
+    const dateStrings = futureDates.map(d => formatDateShort(d)).join('、');
+
+    const explanation = futureDates.length > 0
+      ? `最近的${changedZhi}日：${dateStrings}`
+      : `逢${changedZhi}日/月`;
+
     predictions.push({
-      timeWindow: `逢${yongShenYao.changedYao.diZhi}日/月`,
-      basis: '动爻变化后地支当值之时',
+      timeWindow: `变化完成的时间`,
+      basis: explanation,
       confidence: 'low',
       reasoning: {
         steps: [{
           ruleName: '变爻应期',
-          ruleDescription: '动爻化出之支当值',
-          data: { changedDiZhi: yongShenYao.changedYao.diZhi },
-          conclusion: `${yongShenYao.changedYao.diZhi}时应验`,
+          ruleDescription: `关键因素正在变化，变化后的地支是"${changedZhi}"。当这个地支当值时，变化可能会完成或有结果`,
+          data: { changedDiZhi: changedZhi, nearestDates: futureDates.map(d => formatDateChinese(d)) },
+          conclusion: `${changedZhi}时应验`,
           strength: 'weak',
         }],
         conclusion: '待变化完成',
@@ -854,6 +1000,56 @@ function getChangeTypeText(changeType?: string): string {
     'normal': '变',
   };
   return texts[changeType || 'normal'] || '变';
+}
+
+/**
+ * 获取六亲的白话名称
+ */
+function getLiuQinPlainName(liuQin: LiuQin): string {
+  const names: Record<LiuQin, string> = {
+    '父母': '文书/长辈相关的因素',
+    '兄弟': '竞争/消耗相关的因素',
+    '子孙': '福气/解决问题的力量',
+    '妻财': '财物/收益相关的因素',
+    '官鬼': '压力/工作相关的因素',
+  };
+  return names[liuQin] || liuQin;
+}
+
+/**
+ * 获取六亲变化的含义
+ */
+function getChangeImplication(from: LiuQin, to: LiuQin): string {
+  // 财化兄弟 - 财会被消耗
+  if (from === '妻财' && to === '兄弟') {
+    return '财运可能会有消耗或竞争';
+  }
+  // 财化官鬼 - 财带来压力
+  if (from === '妻财' && to === '官鬼') {
+    return '财务方面可能带来压力或责任';
+  }
+  // 官化子孙 - 压力得到化解
+  if (from === '官鬼' && to === '子孙') {
+    return '压力和困难可能会得到化解';
+  }
+  // 官化兄弟 - 竞争者增加
+  if (from === '官鬼' && to === '兄弟') {
+    return '可能会遇到竞争或阻力';
+  }
+  // 子孙化官鬼 - 好事变压力
+  if (from === '子孙' && to === '官鬼') {
+    return '原本顺利的事情可能会变得有压力';
+  }
+  // 兄弟化财 - 付出后有收获
+  if (from === '兄弟' && to === '妻财') {
+    return '经过付出或竞争后可能会有收获';
+  }
+  // 父母化子孙 - 保护变成福气
+  if (from === '父母' && to === '子孙') {
+    return '事情可能会朝轻松愉快的方向发展';
+  }
+  // 默认描述
+  return `原来的${getLiuQinPlainName(from)}转变成了${getLiuQinPlainName(to)}`;
 }
 
 function getTrendTechnical(trend: TrendJudgment): string {

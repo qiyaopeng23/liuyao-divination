@@ -47,7 +47,7 @@ function CastPageContent() {
   const [step, setStep] = useState<'category' | 'gender' | 'cast' | 'result'>('category');
   const [method, setMethod] = useState<CastingMethod>('coin');
   const [category, setCategory] = useState<QuestionCategory>('other');
-  const [gender, setGender] = useState<'male' | 'female' | null>(null);
+  const [gender, setGender] = useState<'male' | 'female' | 'same_sex' | null>(null);
   const [yaoStates, setYaoStates] = useState<YaoState[]>([]);
   const [result, setResult] = useState<DivinationResult | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -71,8 +71,8 @@ function CastPageContent() {
     }
   };
 
-  // 选择性别
-  const handleGenderSelect = (g: 'male' | 'female') => {
+  // 选择性别/感情类型
+  const handleGenderSelect = (g: 'male' | 'female' | 'same_sex') => {
     setGender(g);
     setStep('cast');
   };
@@ -97,25 +97,51 @@ function CastPageContent() {
     performDivination(states);
   };
 
+  // 计算阶段状态
+  const [calculationPhase, setCalculationPhase] = useState<string>('');
+
   // 执行占卜
   const performDivination = (states: YaoState[]) => {
     setIsProcessing(true);
 
-    // 模拟处理延迟，让用户感知到计算过程
-    setTimeout(() => {
-      const input = {
-        method,
-        yaoStates: states as [YaoState, YaoState, YaoState, YaoState, YaoState, YaoState],
-        time: createCastingTime(new Date()),
-        questionCategory: category,
-        gender: gender || undefined,
-      };
+    // 多阶段计算动画，让用户感知到完整的计算过程
+    const phases = [
+      { text: '正在排盘...', delay: 800 },
+      { text: '装六亲、安六神...', delay: 1200 },
+      { text: '分析旺衰格局...', delay: 1000 },
+      { text: '判断用神状态...', delay: 900 },
+      { text: '推演吉凶趋势...', delay: 1100 },
+      { text: '计算应期...', delay: 800 },
+      { text: '生成解读...', delay: 700 },
+    ];
 
-      const divinationResult = castHexagram(input);
-      setResult(divinationResult);
-      setStep('result');
-      setIsProcessing(false);
-    }, 500);
+    let currentIndex = 0;
+    const runPhase = () => {
+      if (currentIndex < phases.length) {
+        setCalculationPhase(phases[currentIndex].text);
+        setTimeout(() => {
+          currentIndex++;
+          runPhase();
+        }, phases[currentIndex].delay);
+      } else {
+        // 所有阶段完成，执行实际计算
+        const input = {
+          method,
+          yaoStates: states as [YaoState, YaoState, YaoState, YaoState, YaoState, YaoState],
+          time: createCastingTime(new Date()),
+          questionCategory: category,
+          gender: gender || undefined,
+        };
+
+        const divinationResult = castHexagram(input);
+        setResult(divinationResult);
+        setStep('result');
+        setIsProcessing(false);
+        setCalculationPhase('');
+      }
+    };
+
+    runPhase();
   };
 
   // 重新开始
@@ -254,7 +280,7 @@ function CastPageContent() {
             </motion.div>
           )}
 
-          {/* 步骤1.5：选择性别（仅感情类） */}
+          {/* 步骤1.5：选择性别/感情类型（仅感情类） */}
           {step === 'gender' && (
             <motion.div
               key="gender"
@@ -264,35 +290,48 @@ function CastPageContent() {
               className="space-y-6"
             >
               <div className="text-center">
-                <h1 className="text-2xl font-bold mb-2">请选择您的性别</h1>
+                <h1 className="text-2xl font-bold mb-2">请选择您的情况</h1>
                 <p className="text-muted-foreground">
-                  感情类问题需要根据性别选择不同的用神
+                  感情类问题需要根据情况选择不同的分析方式
                 </p>
               </div>
 
-              <div className="flex justify-center gap-6">
+              <div className="flex flex-wrap justify-center gap-4">
                 <Card
-                  className="cursor-pointer card-hover transition-all w-40"
+                  className="cursor-pointer card-hover transition-all w-36"
                   onClick={() => handleGenderSelect('male')}
                 >
-                  <CardContent className="p-6 text-center">
-                    <div className="text-5xl mb-3">👨</div>
-                    <div className="font-medium text-lg">男生</div>
-                    <p className="text-sm text-muted-foreground mt-2">
+                  <CardContent className="p-5 text-center">
+                    <div className="text-4xl mb-2">👨</div>
+                    <div className="font-medium">男生问感情</div>
+                    <p className="text-xs text-muted-foreground mt-1">
                       以妻财为用神
                     </p>
                   </CardContent>
                 </Card>
 
                 <Card
-                  className="cursor-pointer card-hover transition-all w-40"
+                  className="cursor-pointer card-hover transition-all w-36"
                   onClick={() => handleGenderSelect('female')}
                 >
-                  <CardContent className="p-6 text-center">
-                    <div className="text-5xl mb-3">👩</div>
-                    <div className="font-medium text-lg">女生</div>
-                    <p className="text-sm text-muted-foreground mt-2">
+                  <CardContent className="p-5 text-center">
+                    <div className="text-4xl mb-2">👩</div>
+                    <div className="font-medium">女生问感情</div>
+                    <p className="text-xs text-muted-foreground mt-1">
                       以官鬼为用神
+                    </p>
+                  </CardContent>
+                </Card>
+
+                <Card
+                  className="cursor-pointer card-hover transition-all w-36"
+                  onClick={() => handleGenderSelect('same_sex')}
+                >
+                  <CardContent className="p-5 text-center">
+                    <div className="text-4xl mb-2">🌈</div>
+                    <div className="font-medium">同性感情</div>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      以应爻为对方
                     </p>
                   </CardContent>
                 </Card>
@@ -357,17 +396,77 @@ function CastPageContent() {
             </motion.div>
           )}
 
-          {/* 处理中 */}
+          {/* 处理中 - 沉浸式计算动画 */}
           {isProcessing && (
             <motion.div
               key="processing"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="flex flex-col items-center justify-center py-20"
+              className="flex flex-col items-center justify-center py-16"
             >
-              <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mb-4" />
-              <p className="text-muted-foreground">正在排盘分析...</p>
+              {/* 八卦图旋转动画 */}
+              <div className="relative w-32 h-32 mb-8">
+                <motion.div
+                  className="absolute inset-0 rounded-full border-4 border-primary/30"
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+                />
+                <motion.div
+                  className="absolute inset-2 rounded-full border-4 border-primary/50"
+                  animate={{ rotate: -360 }}
+                  transition={{ duration: 6, repeat: Infinity, ease: 'linear' }}
+                />
+                <motion.div
+                  className="absolute inset-4 rounded-full border-4 border-primary/70"
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
+                />
+                {/* 中心太极图样式 */}
+                <div className="absolute inset-6 rounded-full bg-gradient-to-br from-primary/80 to-primary/40 flex items-center justify-center">
+                  <motion.div
+                    className="text-2xl text-primary-foreground font-serif"
+                    animate={{ scale: [1, 1.1, 1] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  >
+                    ☯
+                  </motion.div>
+                </div>
+              </div>
+
+              {/* 计算阶段文字 */}
+              <motion.div
+                key={calculationPhase}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-center space-y-2"
+              >
+                <p className="text-lg font-medium text-foreground">
+                  {calculationPhase || '准备中...'}
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  请稍候，正在为您推演卦象...
+                </p>
+              </motion.div>
+
+              {/* 进度点 */}
+              <div className="flex gap-2 mt-6">
+                {[0, 1, 2].map((i) => (
+                  <motion.div
+                    key={i}
+                    className="w-2 h-2 rounded-full bg-primary"
+                    animate={{
+                      scale: [1, 1.5, 1],
+                      opacity: [0.5, 1, 0.5],
+                    }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
+                      delay: i * 0.3,
+                    }}
+                  />
+                ))}
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
