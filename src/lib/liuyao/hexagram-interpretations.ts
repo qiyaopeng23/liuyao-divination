@@ -1497,6 +1497,651 @@ export const HEXAGRAM_INTERPRETATIONS: Record<string, HexagramInterpretation> = 
       }
     }
   },
+
+  // ============ 震宫八卦 ============
+  '震为雷': {
+    name: '震为雷',
+    overview: '震卦纯雷，象征震动、行动、惊醒。六爻皆震，主事有突发之象，宜动不宜静。',
+    categories: {
+      'career': { judgment: '中吉。有突破机会，宜果断行动。', interpretation: '震卦代表行动和变化，在事业上表示有突破的机会，需要果断行动。', advice: '抓住机会，果断行动。', caution: '行动要有计划，不要盲目冲动。' },
+      'love': { judgment: '感情有变化，可能一见钟情。', interpretation: '震卦在感情上代表突然的变化，可能是一见钟情或感情突然升温。', advice: '抓住感觉，主动出击。', caution: '来得快也可能去得快，要看后续发展。' },
+      'wealth': { judgment: '财运有波动，可能有意外之财。', interpretation: '震卦在财运上代表波动和变化，可能有意外的收入。', advice: '抓住突然出现的机会，但也要控制风险。', caution: '来得快的钱也可能去得快。' },
+      'health': { judgment: '注意惊吓、心脏问题。', interpretation: '震卦在健康上要注意惊吓、心脏问题、肝胆问题等。', advice: '保持心态平稳，避免惊吓。', caution: '有心脏问题的人要特别注意。' },
+      'study': { judgment: '学习有突破，灵感突现。', interpretation: '震卦在学业上代表突然的领悟和进步。', advice: '趁着状态好多学习，抓住灵感。', caution: '灵感来了要记录下来。' },
+      'lawsuit': { judgment: '官司有突变，可能突然有结果。', interpretation: '震卦在诉讼中代表突然的变化。', advice: '做好准备应对突发情况。', caution: '变化来得快，要随机应变。' },
+      'travel': { judgment: '出行有波折，但总体顺利。', interpretation: '震卦出行可能有一些意外情况，但最终能顺利。', advice: '做好应急准备，灵活应对。', caution: '不要被意外打乱阵脚。' },
+      'lost': { judgment: '物品可能在东方或因震动而移位。', interpretation: '震卦方位在东，物品可能在东边，或因震动而离开原位。', advice: '往东边找，或想想是不是因为什么震动移位了。', caution: '可能是自己无意中碰到移位的。' },
+      'other': { judgment: '事情有变化，宜果断行动。', interpretation: '震卦的核心是"动"，无论问什么事，都会有变化发生。', advice: '行动起来，不要等待。', caution: '变化不一定是坏事，要积极应对。' }
+    }
+  },
+
+  '雷地豫': {
+    name: '雷地豫',
+    overview: '豫卦雷在地上，象征喜悦、顺遂、安乐。主事愉快，但也防乐极生悲。',
+    categories: {
+      'career': { judgment: '中吉。工作顺心，但不可懈怠。', interpretation: '豫卦代表顺遂和安乐，工作比较顺心。', advice: '享受顺利的时期，但不要因此懈怠。', caution: '安逸容易让人失去斗志。' },
+      'love': { judgment: '感情愉快，相处和谐。', interpretation: '豫卦在感情上代表愉快和谐。', advice: '享受甜蜜的时光，继续维护感情。', caution: '不要因为太安逸而忽视对方。' },
+      'wealth': { judgment: '财运平稳，有闲钱享乐。', interpretation: '豫卦在财运上代表平稳和宽裕。', advice: '可以适当消费和享受。', caution: '不要因为手头宽裕就乱花钱。' },
+      'health': { judgment: '身体舒适，心情愉快。', interpretation: '豫卦在健康上代表身心舒适。', advice: '保持好心情，适当娱乐放松。', caution: '不要过度放纵。' },
+      'study': { judgment: '学习轻松，但容易分心。', interpretation: '豫卦在学业上学习状态不错，但也容易分心。', advice: '利用好状态学习，不要被娱乐分心。', caution: '不要因为轻松就放松要求。' },
+      'lawsuit': { judgment: '官司可能和解。', interpretation: '豫卦在诉讼中代表可能和解。', advice: '积极寻求和解。', caution: '和解不等于放弃原则。' },
+      'travel': { judgment: '出行愉快，宜休闲旅游。', interpretation: '豫卦出行大吉，适合休闲放松。', advice: '安排一次愉快的旅行。', caution: '玩乐要适度，注意安全。' },
+      'lost': { judgment: '物品可能在娱乐场所。', interpretation: '豫卦代表安乐，物品可能是在娱乐时丢失的。', advice: '想想是不是在玩乐时丢的。', caution: '开心时容易粗心大意。' },
+      'other': { judgment: '事情顺利，心情愉快。', interpretation: '豫卦的核心是"乐"，过程和结果都比较愉快。', advice: '享受顺利，但不要懈怠。', caution: '乐极生悲，要保持清醒。' }
+    }
+  },
+
+  '雷水解': {
+    name: '雷水解',
+    overview: '解卦雷在水上，象征解脱、解决、缓和。主事困难消解，问题得到解决。',
+    categories: {
+      'career': { judgment: '中吉。困难将解决，事业转机。', interpretation: '解卦代表解脱，之前的困难会得到解决。', advice: '抓住转机，继续前进。', caution: '问题解决后不要松懈。' },
+      'love': { judgment: '感情纠结将解开，误会消除。', interpretation: '解卦在感情上代表之前的误会会解开。', advice: '主动化解矛盾，打开心结。', caution: '解开后要防止再次产生误会。' },
+      'wealth': { judgment: '财务压力减轻，资金周转改善。', interpretation: '解卦在财运上代表财务压力会减轻。', advice: '抓住机会改善财务状况。', caution: '改善后要管理好。' },
+      'health': { judgment: '病情好转，身体恢复。', interpretation: '解卦在健康上代表病情好转。', advice: '配合治疗，好好休养。', caution: '好转不等于痊愈。' },
+      'study': { judgment: '学习困难突破，豁然开朗。', interpretation: '解卦在学业上代表之前不懂的问题会突然明白。', advice: '趁着状态好继续深入学习。', caution: '一个问题解决了，还有更多要学。' },
+      'lawsuit': { judgment: '官司有望解决，可能和解。', interpretation: '解卦在诉讼中代表案件有望解决。', advice: '积极寻求解决方案。', caution: '解决后要落实到位。' },
+      'travel': { judgment: '出行顺利，之前的障碍消除。', interpretation: '解卦出行吉利，障碍会消除。', advice: '可以安排之前推迟的出行了。', caution: '基本的准备还是要做。' },
+      'lost': { judgment: '有希望找回，束缚解除。', interpretation: '解卦代表解脱，物品有希望找回。', advice: '再找找，可能会出现。', caution: '可能在被什么东西压着的地方。' },
+      'other': { judgment: '困难将解决，迎来转机。', interpretation: '解卦的核心是"解"，都会有解决的转机。', advice: '积极寻求解决方案。', caution: '问题解决后要巩固成果。' }
+    }
+  },
+
+  '雷风恒': {
+    name: '雷风恒',
+    overview: '恒卦雷风相配，象征恒久、持久、稳定。主事宜持久经营，不宜变动。',
+    categories: {
+      'career': { judgment: '中吉。宜坚守，持久经营。', interpretation: '恒卦代表持久和稳定，宜坚守现有岗位。', advice: '不要轻易换工作，坚持会有收获。', caution: '坚守但不要固执。' },
+      'love': { judgment: '感情稳定，可以长久。', interpretation: '恒卦在感情上代表稳定和长久。', advice: '珍惜这份稳定的感情。', caution: '稳定不等于不需要经营。' },
+      'wealth': { judgment: '财运稳定，宜长期投资。', interpretation: '恒卦在财运上代表稳定，适合做长期投资。', advice: '选择稳定的理财方式。', caution: '不要被短期收益诱惑。' },
+      'health': { judgment: '健康稳定，保持良好习惯。', interpretation: '恒卦在健康上代表稳定。', advice: '坚持健康的生活方式。', caution: '不要因为没问题就放松。' },
+      'study': { judgment: '学习贵在坚持，持之以恒。', interpretation: '恒卦在学业上代表需要持久的努力。', advice: '制定计划，坚持执行。', caution: '学习是长期的事。' },
+      'lawsuit': { judgment: '官司可能持久，需要耐心。', interpretation: '恒卦在诉讼中代表案件可能会持续较长时间。', advice: '做好持久战的准备。', caution: '不要因为时间长就放弃。' },
+      'travel': { judgment: '适合长期旅居，不宜短途。', interpretation: '恒卦出行适合长期旅居或长途旅行。', advice: '可以安排长一点的行程。', caution: '长途要做好充分准备。' },
+      'lost': { judgment: '物品可能在老地方。', interpretation: '恒卦代表恒久，物品可能一直在那个地方。', advice: '再仔细找找原来的地方。', caution: '可能就在你熟悉的角落。' },
+      'other': { judgment: '宜坚持，持之以恒。', interpretation: '恒卦的核心是"恒"，都需要持久的努力。', advice: '坚持就是胜利。', caution: '坚持方向对的事。' }
+    }
+  },
+
+  '地风升': {
+    name: '地风升',
+    overview: '升卦木在地中，象征上升、进步、晋升。主事蒸蒸日上，前景光明。',
+    categories: {
+      'career': { judgment: '大吉。事业上升，晋升有望。', interpretation: '升卦是事业最好的卦之一，代表上升和晋升。', advice: '抓住机会，积极进取。', caution: '上升期也要低调。' },
+      'love': { judgment: '感情升温，越来越好。', interpretation: '升卦在感情上代表感情在升温。', advice: '继续用心经营。', caution: '升温后也要维护。' },
+      'wealth': { judgment: '财运上升，收入增加。', interpretation: '升卦在财运上代表财运上升。', advice: '积极把握赚钱机会。', caution: '收入增加后要合理规划。' },
+      'health': { judgment: '健康改善，状态上升。', interpretation: '升卦在健康上代表身体状态在改善。', advice: '保持良好的生活习惯。', caution: '改善中也要继续注意保养。' },
+      'study': { judgment: '学业进步，成绩上升。', interpretation: '升卦在学业上代表成绩上升。', advice: '继续努力，可以更上一层楼。', caution: '进步后不要骄傲。' },
+      'lawsuit': { judgment: '形势好转，有利于你。', interpretation: '升卦在诉讼中代表形势在向有利于你的方向发展。', advice: '继续努力，胜利在望。', caution: '形势好也不能大意。' },
+      'travel': { judgment: '出行顺利，往南方更佳。', interpretation: '升卦出行吉利，往南方出行更好。', advice: '可以放心出行。', caution: '顺利也要注意基本安全。' },
+      'lost': { judgment: '物品可能在高处或上方。', interpretation: '升卦代表上升，物品可能在比预期更高的地方。', advice: '往高处找，架子上、柜子顶等。', caution: '找高处时注意安全。' },
+      'other': { judgment: '事情向好发展，前景光明。', interpretation: '升卦的核心是"升"，都在向好的方向发展。', advice: '积极进取，把握上升期。', caution: '上升期是有限的，要好好利用。' }
+    }
+  },
+
+  '水风井': {
+    name: '水风井',
+    overview: '井卦水在木上，象征滋养、资源、稳定供给。主事有稳定的资源和支持。',
+    categories: {
+      'career': { judgment: '中吉。工作稳定，有持续的支持。', interpretation: '井卦代表稳定的供给，有稳定的工作和资源支持。', advice: '珍惜稳定的环境，好好发挥。', caution: '稳定但不要停止进步。' },
+      'love': { judgment: '感情需要滋养，用心呵护。', interpretation: '井卦在感情上代表感情需要持续的滋养和呵护。', advice: '像浇灌井水一样呵护感情。', caution: '感情不能只索取不付出。' },
+      'wealth': { judgment: '财运稳定，有持续收入。', interpretation: '井卦在财运上代表有稳定的收入来源。', advice: '维护好你的收入来源。', caution: '稳定的收入也要节俭使用。' },
+      'health': { judgment: '注意肾脏、泌尿系统。', interpretation: '井卦在健康上要注意肾脏、膀胱、泌尿系统等问题。', advice: '多喝水，注意肾脏保养。', caution: '有相关症状要及时检查。' },
+      'study': { judgment: '学习需要持续积累。', interpretation: '井卦在学业上代表学习需要持续的积累。', advice: '每天学一点，积少成多。', caution: '不要急于求成。' },
+      'lawsuit': { judgment: '需要持久战，慢慢来。', interpretation: '井卦在诉讼中代表需要持久的努力。', advice: '做好长期准备，慢慢推进。', caution: '不要急躁。' },
+      'travel': { judgment: '出行平稳，注意水源。', interpretation: '井卦出行平稳。', advice: '出行时注意饮水卫生。', caution: '去陌生地方要了解当地水质。' },
+      'lost': { judgment: '物品可能在与水有关的地方。', interpretation: '井卦代表水，物品可能在洗手间、厨房水槽附近。', advice: '往有水的地方找找。', caution: '注意是否掉进水里了。' },
+      'other': { judgment: '有稳定的资源支持。', interpretation: '井卦的核心是"供给"，都会有稳定的资源和支持。', advice: '利用好现有的资源。', caution: '资源虽好，也要节约使用。' }
+    }
+  },
+
+  '泽风大过': {
+    name: '泽风大过',
+    overview: '大过卦泽在木上，象征过度、超常、独立。主事有非常之举，但也有风险。',
+    categories: {
+      'career': { judgment: '有挑战，需要非常手段。', interpretation: '大过卦代表超常和过度，可能需要采取非常规的手段。', advice: '必要时可以打破常规，但要有把握。', caution: '非常手段要慎用，风险也大。' },
+      'love': { judgment: '感情可能走极端，需要平衡。', interpretation: '大过卦在感情上代表可能有极端的表现。', advice: '寻求平衡，不要走极端。', caution: '感情太过或不及都不好。' },
+      'wealth': { judgment: '可能有大的机会，也有大的风险。', interpretation: '大过卦在财运上代表可能有超常的机会，但风险也相应增大。', advice: '高风险高收益，量力而行。', caution: '不要孤注一掷。' },
+      'health': { judgment: '身体可能负担过重。', interpretation: '大过卦在健康上代表身体可能承受了过重的负担。', advice: '减轻负担，适当休息。', caution: '不要硬撑，身体是本钱。' },
+      'study': { judgment: '学习强度可能过大。', interpretation: '大过卦在学业上可能表示学习强度过大。', advice: '注意劳逸结合。', caution: '过度学习反而效果不好。' },
+      'lawsuit': { judgment: '可能需要采取非常手段。', interpretation: '大过卦在诉讼中代表可能需要采取非常规的策略。', advice: '必要时可以出奇制胜。', caution: '非常手段要合法合规。' },
+      'travel': { judgment: '出行可能有特殊情况。', interpretation: '大过卦出行可能遇到特殊情况。', advice: '做好应对特殊情况的准备。', caution: '不要冒险，安全第一。' },
+      'lost': { judgment: '物品可能在意想不到的地方。', interpretation: '大过卦代表超常，物品可能在你想不到的地方。', advice: '跳出常规思维，想想不可能的地方。', caution: '可能需要发散思维才能找到。' },
+      'other': { judgment: '可能需要非常之举。', interpretation: '大过卦的核心是"过"，可能需要超常的手段。', advice: '必要时可以打破常规。', caution: '非常手段风险大，要权衡利弊。' }
+    }
+  },
+
+  '泽雷随': {
+    name: '泽雷随',
+    overview: '随卦泽在雷上，象征跟随、顺应、追随。主事宜顺势而为，不宜逆势。',
+    categories: {
+      'career': { judgment: '中吉。顺势而为，跟随趋势。', interpretation: '随卦代表跟随和顺应，要顺应大势。', advice: '看清形势，顺势而为。', caution: '不要盲目跟风，要有自己的判断。' },
+      'love': { judgment: '感情中适合配合对方。', interpretation: '随卦在感情上代表适合配合对方。', advice: '适当退让，配合对方。', caution: '配合但不要失去自我。' },
+      'wealth': { judgment: '跟随市场趋势投资。', interpretation: '随卦在财运上代表要跟随市场趋势。', advice: '顺势投资，不要逆势而行。', caution: '跟风也要有自己的判断。' },
+      'health': { judgment: '随遇而安，保持平和心态。', interpretation: '随卦在健康上代表要随遇而安。', advice: '不要强求，顺其自然。', caution: '该治疗还是要治疗。' },
+      'study': { judgment: '跟随老师或前辈学习。', interpretation: '随卦在学业上代表要跟随老师或前辈学习。', advice: '找一个好老师，认真跟随学习。', caution: '学习要有主见，不能完全盲从。' },
+      'lawsuit': { judgment: '宜顺应形势，不宜硬碰硬。', interpretation: '随卦在诉讼中代表要顺应形势。', advice: '看清形势，灵活应对。', caution: '顺应不等于放弃原则。' },
+      'travel': { judgment: '适合跟团游，随遇而安。', interpretation: '随卦出行适合跟团或随性的旅行。', advice: '随遇而安，享受旅程。', caution: '跟团也要注意自身安全。' },
+      'lost': { judgment: '物品可能跟着某物移动了。', interpretation: '随卦代表跟随，物品可能跟着某个人或某个东西移动了。', advice: '想想是不是跟着什么东西移位了。', caution: '可能无意中被带走了。' },
+      'other': { judgment: '顺势而为，随遇而安。', interpretation: '随卦的核心是"随"，要顺应大势。', advice: '看清形势，顺势而为。', caution: '随遇而安但不要随波逐流。' }
+    }
+  },
+
+  // ============ 巽宫八卦 ============
+  '巽为风': {
+    name: '巽为风',
+    overview: '巽卦纯风，象征柔顺、渗透、命令。主事宜柔不宜刚，宜渗透不宜强攻。',
+    categories: {
+      'career': { judgment: '中吉。宜柔顺处事，不宜强硬。', interpretation: '巽卦代表柔顺和渗透，要柔顺处事。', advice: '以柔克刚，润物细无声地推进工作。', caution: '柔顺但不要软弱。' },
+      'love': { judgment: '感情温柔，细水长流。', interpretation: '巽卦在感情上代表温柔和绵长。', advice: '用温柔和耐心经营感情。', caution: '不要太犹豫不决。' },
+      'wealth': { judgment: '财运平稳，宜稳健经营。', interpretation: '巽卦在财运上代表平稳。', advice: '稳扎稳打，不要冒进。', caution: '风向会变，要注意市场变化。' },
+      'health': { judgment: '注意呼吸系统、感冒问题。', interpretation: '巽为风，要注意呼吸系统、感冒等问题。', advice: '注意保暖，避免受风。', caution: '有呼吸道问题要及时就医。' },
+      'study': { judgment: '学习要循序渐进。', interpretation: '巽卦在学业上代表要循序渐进。', advice: '不要急于求成，一点一点积累。', caution: '进度慢不要紧，关键是方向对。' },
+      'lawsuit': { judgment: '宜用柔和策略。', interpretation: '巽卦在诉讼中代表宜用柔和的策略。', advice: '寻求调解或用柔和的方式解决。', caution: '柔和但不要放弃原则。' },
+      'travel': { judgment: '出行顺风，宜往东南方。', interpretation: '巽卦方位在东南，往东南方向出行更顺利。', advice: '可以放心出行。', caution: '刮风天要注意安全。' },
+      'lost': { judgment: '物品可能被风吹走或在东南方。', interpretation: '巽为风，物品可能被风吹到某处，或在东南方向。', advice: '往东南方向找。', caution: '轻的东西更容易被风影响。' },
+      'other': { judgment: '宜柔顺渗透，不宜强攻。', interpretation: '巽卦的核心是"柔"和"渗透"。', advice: '以柔克刚，润物细无声。', caution: '柔顺但要有主见。' }
+    }
+  },
+
+  '风天小畜': {
+    name: '风天小畜',
+    overview: '小畜卦风在天上，象征小的积蓄、暂时的停滞。主事有小阻碍，但终会过去。',
+    categories: {
+      'career': { judgment: '小有阻碍，但终会过去。', interpretation: '小畜卦代表小的积蓄和暂时的停滞，有小阻碍但不是大问题。', advice: '耐心等待，小阻碍会过去。', caution: '不要因为小阻碍就放弃。' },
+      'love': { judgment: '感情有小波折，但可以解决。', interpretation: '小畜卦在感情上表示有小的波折。', advice: '耐心处理，小问题会解决。', caution: '小问题不处理会变成大问题。' },
+      'wealth': { judgment: '财运小有积蓄，不宜大投资。', interpretation: '小畜卦在财运上代表小的积蓄。', advice: '小额投资或储蓄为主。', caution: '不要贪大，稳扎稳打。' },
+      'health': { judgment: '小毛病，不要紧。', interpretation: '小畜卦在健康上代表可能有小毛病。', advice: '小病也要注意，及时处理。', caution: '不要因为是小病就忽视。' },
+      'study': { judgment: '学习有小阻碍，可以克服。', interpretation: '小畜卦在学业上代表可能遇到小困难。', advice: '不要因为小困难就气馁。', caution: '小困难要及时解决。' },
+      'lawsuit': { judgment: '官司有小阻碍，需要耐心。', interpretation: '小畜卦在诉讼中代表会有小的阻碍。', advice: '耐心应对，不要急躁。', caution: '小阻碍也要认真对待。' },
+      'travel': { judgment: '出行可能有小延误。', interpretation: '小畜卦出行可能有小的延误。', advice: '预留一些时间，灵活应对。', caution: '小问题处理好就行。' },
+      'lost': { judgment: '物品可能在附近，仔细找找。', interpretation: '小畜卦代表小的积蓄，物品可能就在附近不远处。', advice: '在周围仔细找找。', caution: '可能就在眼皮底下。' },
+      'other': { judgment: '小有阻碍，可以克服。', interpretation: '小畜卦的核心是"小"，只是小问题。', advice: '不要把小问题放大，耐心处理。', caution: '小问题也要认真对待。' }
+    }
+  },
+
+  '风火家人': {
+    name: '风火家人',
+    overview: '家人卦风在火上，象征家庭、家人、内部管理。主事宜内不宜外，重视家庭。',
+    categories: {
+      'career': { judgment: '宜内部管理，不宜对外扩张。', interpretation: '家人卦代表家庭和内部，宜加强内部管理。', advice: '先把内部理顺，再考虑扩张。', caution: '内部不稳定，对外必然失败。' },
+      'love': { judgment: '感情如家人般温馨，适合成家。', interpretation: '家人卦在感情上是很好的卦象，适合结婚成家。', advice: '如果感情成熟，可以考虑结婚。', caution: '成家后要共同经营。' },
+      'wealth': { judgment: '家庭财务要管理好。', interpretation: '家人卦在财运上强调家庭财务管理。', advice: '做好家庭财务规划。', caution: '家庭开支要有计划。' },
+      'health': { judgment: '家庭成员健康，注意家庭氛围。', interpretation: '家人卦在健康上表示家庭氛围会影响健康。', advice: '营造和谐的家庭氛围。', caution: '家庭矛盾会影响身心健康。' },
+      'study': { judgment: '家庭支持学业，在家学习效果好。', interpretation: '家人卦在学业上代表家庭会支持你的学业。', advice: '利用好家庭的支持和环境。', caution: '不要因为家人的支持就懈怠。' },
+      'lawsuit': { judgment: '可能是家庭内部纠纷。', interpretation: '家人卦在诉讼中可能表示是家庭内部的纠纷。', advice: '家丑不可外扬，尽量内部解决。', caution: '家庭纠纷最伤感情。' },
+      'travel': { judgment: '适合家庭出游。', interpretation: '家人卦出行适合和家人一起出游。', advice: '带上家人一起出行。', caution: '照顾好老人和孩子。' },
+      'lost': { judgment: '物品可能在家中。', interpretation: '家人卦代表家庭，物品很可能就在家里某处。', advice: '在家里仔细找找。', caution: '可能是家人无意中收起来了。' },
+      'other': { judgment: '重视家庭，内部和谐。', interpretation: '家人卦的核心是"家"，与家庭有关。', advice: '把家庭放在重要位置。', caution: '家和万事兴。' }
+    }
+  },
+
+  '风雷益': {
+    name: '风雷益',
+    overview: '益卦风雷相应，象征增益、利益、获得。主事有益处，得到好处。',
+    categories: {
+      'career': { judgment: '大吉。事业有增益，前景好。', interpretation: '益卦代表增益和利益，会有进步和收获。', advice: '积极进取，会有好的收获。', caution: '得到好处也要分享。' },
+      'love': { judgment: '感情有进展，双方都有收获。', interpretation: '益卦在感情上代表双方都能从感情中获益。', advice: '用心经营，感情会越来越好。', caution: '感情不能只计算利益。' },
+      'wealth': { judgment: '财运增长，有额外收入。', interpretation: '益卦在财运上是好卦，代表财运增长。', advice: '把握赚钱的机会。', caution: '得财后要管理好，不要挥霍。' },
+      'health': { judgment: '健康改善，有益于身体。', interpretation: '益卦在健康上代表对身体有益。', advice: '做对身体有益的事情。', caution: '保持良好的生活习惯。' },
+      'study': { judgment: '学业有进步，学习有收获。', interpretation: '益卦在学业上代表学习有收获。', advice: '认真学习，会有好的收获。', caution: '进步后不要骄傲。' },
+      'lawsuit': { judgment: '有利于你，可能获得补偿。', interpretation: '益卦在诉讼中代表对你有利。', advice: '积极争取应得的利益。', caution: '获益后要见好就收。' },
+      'travel': { judgment: '出行有收获，不虚此行。', interpretation: '益卦出行吉利，旅途中可能有收获。', advice: '可以放心出行，会有收获。', caution: '收获的同时注意安全。' },
+      'lost': { judgment: '物品可能找回，甚至有额外发现。', interpretation: '益卦代表增益，物品有可能找回。', advice: '认真寻找，会有好消息。', caution: '找到后要妥善保管。' },
+      'other': { judgment: '有益处，收获满满。', interpretation: '益卦的核心是"益"，都会有收获。', advice: '积极行动，会有好的收获。', caution: '有益但也要懂得分享。' }
+    }
+  },
+
+  '天雷无妄': {
+    name: '天雷无妄',
+    overview: '无妄卦天在雷上，象征无妄想、真实、自然。主事宜顺应自然，不可妄动。',
+    categories: {
+      'career': { judgment: '中吉。顺应天时，不可妄动。', interpretation: '无妄卦代表无妄想，要顺应自然规律。', advice: '做好本分的事，不要异想天开。', caution: '妄想会带来灾祸。' },
+      'love': { judgment: '感情要真实，不可虚伪。', interpretation: '无妄卦在感情上代表要真实。', advice: '用真心对待感情，不要欺骗。', caution: '虚假的感情不会长久。' },
+      'wealth': { judgment: '求财要正当，不可妄取。', interpretation: '无妄卦在财运上代表要正当求财。', advice: '踏实赚钱，不要想着投机取巧。', caution: '妄取必有妄失。' },
+      'health': { judgment: '身体自然健康，不要乱补。', interpretation: '无妄卦在健康上代表顺应自然就好。', advice: '保持自然的生活方式。', caution: '乱吃补品反而有害。' },
+      'study': { judgment: '学习要踏实，不可投机。', interpretation: '无妄卦在学业上代表要踏实学习。', advice: '一步一个脚印，踏实学习。', caution: '投机取巧终会露馅。' },
+      'lawsuit': { judgment: '官司要正当，不可作假。', interpretation: '无妄卦在诉讼中代表要正当应对。', advice: '以真实的证据说话。', caution: '作假会被揭穿。' },
+      'travel': { judgment: '出行顺其自然，不强求。', interpretation: '无妄卦出行宜顺其自然。', advice: '随遇而安，顺其自然。', caution: '不要有过高期望。' },
+      'lost': { judgment: '物品可能自然出现。', interpretation: '无妄卦代表自然，物品可能会自然出现。', advice: '不要太着急，可能会自然出现。', caution: '顺其自然，不要强求。' },
+      'other': { judgment: '顺应自然，不可妄动。', interpretation: '无妄卦的核心是"无妄"，要顺应自然。', advice: '做好本分，顺其自然。', caution: '妄想妄动必有灾祸。' }
+    }
+  },
+
+  '火雷噬嗑': {
+    name: '火雷噬嗑',
+    overview: '噬嗑卦火在雷上，象征咬合、决断、刑法。主事需要果断处理，排除障碍。',
+    categories: {
+      'career': { judgment: '中吉。需要果断处理问题。', interpretation: '噬嗑卦代表咬合和决断，需要果断处理障碍。', advice: '果断处理问题，不要拖泥带水。', caution: '处理问题要公正。' },
+      'love': { judgment: '感情中可能有障碍需要排除。', interpretation: '噬嗑卦在感情上表示可能有障碍。', advice: '果断排除障碍，该断则断。', caution: '处理问题时也要顾及对方感受。' },
+      'wealth': { judgment: '财务问题需要果断处理。', interpretation: '噬嗑卦在财运上表示可能有财务纠纷。', advice: '果断处理财务问题，不要拖延。', caution: '处理财务要合法合规。' },
+      'health': { judgment: '疾病需要积极治疗。', interpretation: '噬嗑卦在健康上表示如果有病，需要积极治疗。', advice: '该治疗就治疗，不要讳疾忌医。', caution: '配合医生的治疗方案。' },
+      'study': { judgment: '学习中的问题要攻克。', interpretation: '噬嗑卦在学业上代表要攻克学习中的难题。', advice: '面对难题，努力攻克。', caution: '难题攻克后才能真正进步。' },
+      'lawsuit': { judgment: '官司需要严格依法处理。', interpretation: '噬嗑卦本身就有刑法之象，要依法处理。', advice: '依法行事，严格按程序来。', caution: '法律面前人人平等。' },
+      'travel': { judgment: '出行可能有障碍需要处理。', interpretation: '噬嗑卦出行可能遇到障碍。', advice: '遇到问题果断解决，不要拖。', caution: '处理问题时要冷静。' },
+      'lost': { judgment: '物品可能被卡在某处。', interpretation: '噬嗑卦代表咬合，物品可能被卡在某个缝隙里。', advice: '往缝隙、角落里找找。', caution: '可能需要移开一些东西才能找到。' },
+      'other': { judgment: '需要果断处理问题。', interpretation: '噬嗑卦的核心是"决断"，需要果断处理。', advice: '果断行动，排除障碍。', caution: '处理问题要公正合理。' }
+    }
+  },
+
+  '山雷颐': {
+    name: '山雷颐',
+    overview: '颐卦山在雷上，象征颐养、饮食、修养。主事宜修养，注意饮食。',
+    categories: {
+      'career': { judgment: '中平。宜养精蓄锐，修养身心。', interpretation: '颐卦代表颐养，现在宜养精蓄锐。', advice: '休养生息，积蓄力量。', caution: '不要在不成熟的时候出击。' },
+      'love': { judgment: '感情需要用心培养。', interpretation: '颐卦在感情上代表需要用心培养和呵护感情。', advice: '像养育孩子一样呵护感情。', caution: '感情需要持续的投入和培养。' },
+      'wealth': { judgment: '财运平稳，宜储蓄不宜投资。', interpretation: '颐卦在财运上代表宜储蓄。', advice: '存点钱，不要乱花。', caution: '现在不是大投资的时候。' },
+      'health': { judgment: '注意饮食健康，好好调养。', interpretation: '颐卦代表饮食和修养，要注意饮食健康。', advice: '注意饮食，好好调养身体。', caution: '病从口入，要注意饮食卫生。' },
+      'study': { judgment: '学习宜吸收知识，好好消化。', interpretation: '颐卦在学业上代表要像吃饭一样吸收知识。', advice: '学习后要好好消化理解。', caution: '不要囫囵吞枣，要真正理解。' },
+      'lawsuit': { judgment: '官司宜暂缓，养精蓄锐。', interpretation: '颐卦在诉讼中表示宜暂缓。', advice: '不要急于起诉或应诉，先准备好。', caution: '准备充分再行动。' },
+      'travel': { judgment: '出行宜休闲养生。', interpretation: '颐卦出行适合休闲养生类的旅行。', advice: '可以去温泉、度假村放松。', caution: '出行注意饮食安全。' },
+      'lost': { judgment: '物品可能在与吃有关的地方。', interpretation: '颐卦代表饮食，物品可能在厨房、餐厅或与吃有关的地方。', advice: '往厨房、餐桌附近找找。', caution: '可能是吃东西时随手放的。' },
+      'other': { judgment: '宜修养，不宜妄动。', interpretation: '颐卦的核心是"养"，现在都宜修养而非行动。', advice: '养精蓄锐，等待时机。', caution: '修养期也要有所准备。' }
+    }
+  },
+
+  '山风蛊': {
+    name: '山风蛊',
+    overview: '蛊卦山在风上，象征蛊惑、腐败、整治。主事有问题需要整治，但整治后会好转。',
+    categories: {
+      'career': { judgment: '有问题需要整治，整治后会好。', interpretation: '蛊卦代表腐败和整治，可能有积弊需要整治。', advice: '正视问题，积极整改。', caution: '问题不处理会越来越严重。' },
+      'love': { judgment: '感情可能有问题，需要修复。', interpretation: '蛊卦在感情上表示可能有积累的问题。', advice: '正视感情中的问题，努力修复。', caution: '问题拖久了会更难处理。' },
+      'wealth': { judgment: '财务可能有隐患，需要清理。', interpretation: '蛊卦在财运上表示可能有财务隐患。', advice: '清理财务问题，不要留隐患。', caution: '财务问题越早处理越好。' },
+      'health': { judgment: '可能有慢性病或隐疾。', interpretation: '蛊卦在健康上表示可能有慢性病或隐藏的问题。', advice: '做个全面检查，不要讳疾忌医。', caution: '早发现早治疗。' },
+      'study': { judgment: '学习基础可能有问题，需要补漏。', interpretation: '蛊卦在学业上表示可能基础不牢。', advice: '回去补基础，不要急于求成。', caution: '基础不牢，地动山摇。' },
+      'lawsuit': { judgment: '案件可能有隐情，需要调查。', interpretation: '蛊卦在诉讼中表示案件可能有隐情。', advice: '深入调查，找出真相。', caution: '不要被表面现象迷惑。' },
+      'travel': { judgment: '出行前检查好准备工作。', interpretation: '蛊卦出行前要检查好各项准备。', advice: '出行前仔细检查，不要有遗漏。', caution: '隐患不排除会出问题。' },
+      'lost': { judgment: '物品可能在杂乱处或腐败处。', interpretation: '蛊卦代表腐败，物品可能在杂乱的角落。', advice: '往杂乱的地方找找，顺便整理一下。', caution: '可能是因为太乱找不到。' },
+      'other': { judgment: '有问题需要整治，但会好转。', interpretation: '蛊卦的核心是"整治"，需要正视问题并解决。', advice: '正视问题，积极整改，会有好转。', caution: '问题不解决只会更严重。' }
+    }
+  },
+
+  // ============ 坎宫八卦 ============
+  '坎为水': {
+    name: '坎为水',
+    overview: '坎卦纯水，象征险难、坎坷、智慧。主事有险阻，但以智慧可以化解。',
+    categories: {
+      'career': { judgment: '有险阻，需要智慧应对。', interpretation: '坎卦代表险难和坎坷，事业上会遇到困难。', advice: '用智慧化解困难，不要硬碰硬。', caution: '陷入困境时不要慌乱。' },
+      'love': { judgment: '感情有波折，需要用心经营。', interpretation: '坎卦在感情上代表有波折和困难。', advice: '用真心和智慧化解感情中的问题。', caution: '不要因为困难就放弃。' },
+      'wealth': { judgment: '财运有风险，谨慎投资。', interpretation: '坎卦在财运上代表有风险，投资要谨慎。', advice: '控制风险，稳健理财。', caution: '不要贪心冒险。' },
+      'health': { judgment: '注意肾脏、耳朵、血液问题。', interpretation: '坎为水，在健康上要注意肾脏、耳朵、血液等问题。', advice: '多喝水，注意肾脏保养。', caution: '有相关症状要及时就医。' },
+      'study': { judgment: '学习有困难，但可以突破。', interpretation: '坎卦在学业上代表会遇到困难，但坚持可以突破。', advice: '迎难而上，困难是成长的机会。', caution: '不要被困难吓倒。' },
+      'lawsuit': { judgment: '官司困难重重，需要智慧。', interpretation: '坎卦在诉讼中代表案件会比较困难。', advice: '用智慧和策略应对。', caution: '做好长期准备。' },
+      'travel': { judgment: '出行有险，宜往北方。', interpretation: '坎卦方位在北，出行可能有危险。', advice: '如果出行，往北方更好，但要小心。', caution: '出行时注意水边安全。' },
+      'lost': { judgment: '物品可能在与水有关的地方或北方。', interpretation: '坎为水，物品可能在水边、潮湿处或北方。', advice: '往有水的地方或北方找找。', caution: '可能掉进水里了。' },
+      'other': { judgment: '事情有困难，但可以化解。', interpretation: '坎卦的核心是"险"，但以智慧可以化解。', advice: '用智慧应对困难。', caution: '不要轻敌，困难确实存在。' }
+    }
+  },
+
+  '水泽节': {
+    name: '水泽节',
+    overview: '节卦水在泽上，象征节制、节约、适度。主事宜节制，不可过度。',
+    categories: {
+      'career': { judgment: '中吉。事业宜节制，不可过度扩张。', interpretation: '节卦代表节制，事业上要适度发展。', advice: '量力而行，不要过度扩张。', caution: '过度扩张会出问题。' },
+      'love': { judgment: '感情宜细水长流，不可过于热烈。', interpretation: '节卦在感情上代表要适度，不可太过。', advice: '感情需要节制，细水长流。', caution: '太过热烈可能会燃烧殆尽。' },
+      'wealth': { judgment: '财运平稳，宜节俭理财。', interpretation: '节卦在财运上代表要节约。', advice: '节俭持家，量入为出。', caution: '不要超支或过度消费。' },
+      'health': { judgment: '注意节制饮食和作息。', interpretation: '节卦在健康上代表要节制。', advice: '饮食有节，作息规律。', caution: '过度放纵会伤身。' },
+      'study': { judgment: '学习要有节奏，劳逸结合。', interpretation: '节卦在学业上代表学习要有节制。', advice: '劳逸结合，不要过度用功。', caution: '过度用功反而效果不好。' },
+      'lawsuit': { judgment: '官司宜适可而止，见好就收。', interpretation: '节卦在诉讼中代表要适度。', advice: '适可而止，不要得理不饶人。', caution: '过度争执两败俱伤。' },
+      'travel': { judgment: '出行宜短途，不宜过于奔波。', interpretation: '节卦出行宜适度，不要太累。', advice: '轻松出行，不要安排太满。', caution: '过于奔波会很累。' },
+      'lost': { judgment: '物品可能在有界限或分隔的地方。', interpretation: '节卦代表节制和界限，物品可能在有分隔的地方。', advice: '看看有隔断或界限的地方。', caution: '可能在抽屉里或柜子的隔层里。' },
+      'other': { judgment: '事情宜适度，不可过度。', interpretation: '节卦的核心是"节"，凡事要适度。', advice: '节制有度，适可而止。', caution: '过犹不及。' }
+    }
+  },
+
+  '水雷屯': {
+    name: '水雷屯',
+    overview: '屯卦水雷相交，象征初始的困难、艰难的开始。主事虽有困难，但坚持会有成就。',
+    categories: {
+      'career': { judgment: '初创艰难，但前景可期。', interpretation: '屯卦代表艰难的开始，事业初期会有困难。', advice: '坚持下去，万事开头难。', caution: '不要因为开始困难就放弃。' },
+      'love': { judgment: '感情刚开始，需要耐心培养。', interpretation: '屯卦在感情上代表感情刚开始，还不稳定。', advice: '耐心培养，慢慢发展。', caution: '不要急于求成。' },
+      'wealth': { judgment: '财运刚起步，需要积累。', interpretation: '屯卦在财运上代表财富在积累阶段。', advice: '耐心积累，不要急躁。', caution: '不要冒险求快。' },
+      'health': { judgment: '身体在恢复期，需要调养。', interpretation: '屯卦在健康上代表身体在恢复或调整期。', advice: '好好调养，不要过度劳累。', caution: '恢复期不要急于活动。' },
+      'study': { judgment: '学习刚开始，需要打基础。', interpretation: '屯卦在学业上代表学习刚起步。', advice: '打好基础，不要急于求成。', caution: '基础不牢后面会很吃力。' },
+      'lawsuit': { judgment: '官司刚开始，形势不明朗。', interpretation: '屯卦在诉讼中代表案件还在初期。', advice: '做好准备，耐心等待。', caution: '不要急于求结果。' },
+      'travel': { judgment: '出行可能有初期困难。', interpretation: '屯卦出行可能开始有些不顺。', advice: '做好准备，应对初期困难。', caution: '困难过后会顺利。' },
+      'lost': { judgment: '物品可能在草木或幼嫩物附近。', interpretation: '屯卦有草木初生之象，物品可能在植物附近。', advice: '看看花盆、植物附近。', caution: '可能在绿色的东西附近。' },
+      'other': { judgment: '事情刚开始，困难但有希望。', interpretation: '屯卦的核心是"难"和"始"，开始困难但有希望。', advice: '坚持就是胜利，万事开头难。', caution: '不要因为开始难就放弃。' }
+    }
+  },
+
+  '水火既济': {
+    name: '水火既济',
+    overview: '既济卦水火相济，象征完成、成功、但也是盛极将衰。主事已成，但需防变。',
+    categories: {
+      'career': { judgment: '事业有成，但需防盛极而衰。', interpretation: '既济卦代表成功，但成功后要防止衰落。', advice: '保持成果，居安思危。', caution: '成功后不可懈怠。' },
+      'love': { judgment: '感情圆满，但要维护。', interpretation: '既济卦在感情上代表感情圆满。', advice: '珍惜现有的感情，继续维护。', caution: '圆满后不可大意。' },
+      'wealth': { judgment: '财运达到高峰，宜守不宜攻。', interpretation: '既济卦在财运上代表财运已经很好。', advice: '守住现有财富，不要冒险。', caution: '见好就收，不要贪心。' },
+      'health': { judgment: '身体状态良好，注意保持。', interpretation: '既济卦在健康上代表身体状态好。', advice: '保持良好的生活习惯。', caution: '好的状态也需要维护。' },
+      'study': { judgment: '学业有成，但不可骄傲。', interpretation: '既济卦在学业上代表学业有成就。', advice: '继续努力，精益求精。', caution: '不可骄傲自满。' },
+      'lawsuit': { judgment: '官司将有结果，可能胜诉。', interpretation: '既济卦在诉讼中代表案件将有结果。', advice: '等待好的结果。', caution: '结果出来前不要大意。' },
+      'travel': { judgment: '出行顺利，目的达成。', interpretation: '既济卦出行顺利，能达成目的。', advice: '可以放心出行。', caution: '顺利也要注意安全。' },
+      'lost': { judgment: '物品可能已找到或在原位。', interpretation: '既济卦代表完成，物品可能已在你想到的地方。', advice: '再仔细看看你觉得应该在的地方。', caution: '可能就在眼前。' },
+      'other': { judgment: '事情已成，注意守成。', interpretation: '既济卦的核心是"成"，但成后要守。', advice: '守住成果，居安思危。', caution: '盛极必衰，要有准备。' }
+    }
+  },
+
+  '泽火革': {
+    name: '泽火革',
+    overview: '革卦泽在火上，象征变革、革新、改变。主事需要变革，除旧布新。',
+    categories: {
+      'career': { judgment: '需要变革，改变才有出路。', interpretation: '革卦代表变革，事业上需要改变。', advice: '勇于变革，打破旧有模式。', caution: '变革要有计划，不可盲目。' },
+      'love': { judgment: '感情需要改变，打破僵局。', interpretation: '革卦在感情上代表需要改变。', advice: '如果感情有问题，尝试改变相处模式。', caution: '改变要双方都接受。' },
+      'wealth': { judgment: '财运需要新思路，改变策略。', interpretation: '革卦在财运上代表需要改变理财策略。', advice: '尝试新的理财方式。', caution: '变革有风险，要谨慎。' },
+      'health': { judgment: '身体需要调整，改变生活习惯。', interpretation: '革卦在健康上代表需要改变不良习惯。', advice: '改掉坏习惯，建立健康的生活方式。', caution: '改变习惯需要坚持。' },
+      'study': { judgment: '学习方法需要改变。', interpretation: '革卦在学业上代表需要改变学习方法。', advice: '尝试新的学习方式。', caution: '找到适合自己的方法。' },
+      'lawsuit': { judgment: '官司可能有转折，形势改变。', interpretation: '革卦在诉讼中代表案件可能有转折。', advice: '抓住变化的机会。', caution: '变化可能对你有利也可能不利。' },
+      'travel': { judgment: '出行可能有变化，灵活应对。', interpretation: '革卦出行可能计划有变。', advice: '做好应变准备，灵活调整。', caution: '不要太固执于原计划。' },
+      'lost': { judgment: '物品可能被改变位置或形态。', interpretation: '革卦代表变化，物品可能被移动或改变。', advice: '想想是不是谁动过或整理过。', caution: '可能已经不在原来的形态了。' },
+      'other': { judgment: '事情需要变革，打破现状。', interpretation: '革卦的核心是"变"，需要变革才有出路。', advice: '勇于改变，除旧布新。', caution: '变革要有方向和计划。' }
+    }
+  },
+
+  '雷火丰': {
+    name: '雷火丰',
+    overview: '丰卦雷火皆明，象征丰盛、光明、盛大。主事兴旺，但盛极思衰。',
+    categories: {
+      'career': { judgment: '事业兴旺，达到高峰。', interpretation: '丰卦代表丰盛和兴旺，事业达到顶峰。', advice: '把握高峰期，多做事。', caution: '盛极必衰，要有准备。' },
+      'love': { judgment: '感情丰富热烈，但需防退潮。', interpretation: '丰卦在感情上代表感情热烈丰富。', advice: '享受热恋的时光。', caution: '热情过后也要维护感情。' },
+      'wealth': { judgment: '财运丰收，收益丰厚。', interpretation: '丰卦在财运上代表财运很好，有丰厚收益。', advice: '把握赚钱的好时机。', caution: '丰收后要理财，不要挥霍。' },
+      'health': { judgment: '精力充沛，但防过度劳累。', interpretation: '丰卦在健康上代表精力充沛。', advice: '趁着状态好多做事。', caution: '不要过度消耗。' },
+      'study': { judgment: '学业丰收，成绩优异。', interpretation: '丰卦在学业上代表学业有丰收。', advice: '把握状态好的时期多学习。', caution: '不要骄傲。' },
+      'lawsuit': { judgment: '官司形势大好，可能大胜。', interpretation: '丰卦在诉讼中代表形势对你很有利。', advice: '乘胜追击。', caution: '即使有利也不要大意。' },
+      'travel': { judgment: '出行大吉，收获丰富。', interpretation: '丰卦出行大吉，会有丰富的收获。', advice: '可以安排重要的出行。', caution: '丰收的同时注意安全。' },
+      'lost': { judgment: '物品可能在明亮或丰盛的地方。', interpretation: '丰卦代表光明丰盛，物品可能在明亮或东西多的地方。', advice: '往光亮处或东西多的地方找。', caution: '可能淹没在一堆东西里了。' },
+      'other': { judgment: '事情兴旺，达到顶峰。', interpretation: '丰卦的核心是"盛"，事情达到最好的状态。', advice: '把握巅峰期，有所作为。', caution: '盛极必衰，居安思危。' }
+    }
+  },
+
+  '地火明夷': {
+    name: '地火明夷',
+    overview: '明夷卦火在地下，象征光明受损、艰难时期。主事暂时不利，但光明终会到来。',
+    categories: {
+      'career': { judgment: '事业暂时受挫，需韬光养晦。', interpretation: '明夷卦代表光明受损，事业暂时不顺。', advice: '韬光养晦，等待时机。', caution: '现在不宜出头。' },
+      'love': { judgment: '感情暂时蒙尘，需要耐心。', interpretation: '明夷卦在感情上代表感情暂时不顺。', advice: '保持信心，等待转机。', caution: '不要在困难时做冲动决定。' },
+      'wealth': { judgment: '财运低迷，宜守不宜攻。', interpretation: '明夷卦在财运上代表财运暂时不好。', advice: '守住现有财富，不要冒险。', caution: '现在不是投资的好时机。' },
+      'health': { judgment: '身体可能有隐患，注意检查。', interpretation: '明夷卦在健康上代表可能有隐藏的问题。', advice: '做个全面检查。', caution: '不要忽视身体的信号。' },
+      'study': { judgment: '学习暂时遇到困难，不要灰心。', interpretation: '明夷卦在学业上代表学习暂时受阻。', advice: '坚持学习，困难会过去。', caution: '不要因为暂时的困难就放弃。' },
+      'lawsuit': { judgment: '官司暂时不利，需要等待。', interpretation: '明夷卦在诉讼中代表形势暂时不利。', advice: '保持耐心，等待转机。', caution: '现在不宜主动出击。' },
+      'travel': { judgment: '出行可能有阻碍，宜暂缓。', interpretation: '明夷卦出行可能不顺。', advice: '如无必要，暂缓出行。', caution: '出行时要格外小心。' },
+      'lost': { judgment: '物品可能在黑暗处或被遮挡。', interpretation: '明夷卦代表光明受损，物品可能在黑暗处。', advice: '往黑暗的角落或被东西遮挡的地方找。', caution: '可能被压在什么东西下面。' },
+      'other': { judgment: '事情暂时不顺，需要等待。', interpretation: '明夷卦的核心是"暗"，暂时处于困难期。', advice: '韬光养晦，等待光明。', caution: '黎明前的黑暗是最难熬的。' }
+    }
+  },
+
+  '地水师': {
+    name: '地水师',
+    overview: '师卦水在地中，象征军队、领导、组织。主事需要团结众人，有组织地行动。',
+    categories: {
+      'career': { judgment: '需要领导才能，带领团队。', interpretation: '师卦代表军队和领导，事业上需要组织能力。', advice: '发挥领导才能，带好团队。', caution: '领导要以身作则。' },
+      'love': { judgment: '感情中需要一方主导。', interpretation: '师卦在感情上代表需要有人主导。', advice: '两人中要有一个做决定的人。', caution: '主导但不要独断。' },
+      'wealth': { judgment: '财运需要组织和计划。', interpretation: '师卦在财运上代表需要有计划地理财。', advice: '有组织地理财和投资。', caution: '不要散乱无序地花钱。' },
+      'health': { judgment: '健康需要规律的管理。', interpretation: '师卦在健康上代表需要有规律地管理健康。', advice: '制定健康计划，规律执行。', caution: '健康管理要持之以恒。' },
+      'study': { judgment: '学习需要有计划和纪律。', interpretation: '师卦在学业上代表学习要有纪律。', advice: '制定学习计划，严格执行。', caution: '学习要有纪律性。' },
+      'lawsuit': { judgment: '官司需要组织好证据和策略。', interpretation: '师卦在诉讼中代表需要有组织地应对。', advice: '组织好证据，制定策略。', caution: '打官司要有战略。' },
+      'travel': { judgment: '出行宜有组织，团体行动。', interpretation: '师卦出行适合团体有组织的行动。', advice: '团队出行，有人带队。', caution: '不要各自为政。' },
+      'lost': { judgment: '物品可能被有序地收起来了。', interpretation: '师卦代表组织，物品可能被整理收起来了。', advice: '看看是不是被收到固定的地方了。', caution: '可能是家人或自己整理时收起来的。' },
+      'other': { judgment: '事情需要组织和领导。', interpretation: '师卦的核心是"组织"和"领导"。', advice: '有计划、有组织地行动。', caution: '领导要负责任。' }
+    }
+  },
+
+  // ============ 艮宫八卦 ============
+  '艮为山': {
+    name: '艮为山',
+    overview: '艮卦纯山，象征止、静、稳定。主事宜静不宜动，宜守不宜进。',
+    categories: {
+      'career': { judgment: '宜静守，不宜轻动。', interpretation: '艮卦代表止和静，事业上宜守不宜进。', advice: '稳守现有位置，不要冒进。', caution: '现在不是扩张的时候。' },
+      'love': { judgment: '感情宜稳定，不宜急躁。', interpretation: '艮卦在感情上代表宜稳定发展。', advice: '慢慢来，不要急于推进。', caution: '急躁反而不好。' },
+      'wealth': { judgment: '财运平稳，宜守财。', interpretation: '艮卦在财运上代表宜守不宜攻。', advice: '守住现有财富。', caution: '不要冒险投资。' },
+      'health': { judgment: '注意骨骼、关节问题。', interpretation: '艮为山为骨，要注意骨骼和关节。', advice: '注意骨骼保养，补钙。', caution: '有关节问题要及时就医。' },
+      'study': { judgment: '学习宜踏实，稳扎稳打。', interpretation: '艮卦在学业上代表要踏实学习。', advice: '稳扎稳打，不要急躁。', caution: '基础要打牢。' },
+      'lawsuit': { judgment: '官司宜静观其变。', interpretation: '艮卦在诉讼中代表宜静观其变。', advice: '不要主动出击，等待时机。', caution: '急躁可能适得其反。' },
+      'travel': { judgment: '不宜出行，宜静守。', interpretation: '艮卦不利于出行。', advice: '如无必要，暂不出行。', caution: '出行可能不顺。' },
+      'lost': { judgment: '物品可能在高处或东北方。', interpretation: '艮为山，物品可能在高处或东北方。', advice: '往高处或东北方向找。', caution: '可能在稳定不动的地方。' },
+      'other': { judgment: '事情宜静不宜动。', interpretation: '艮卦的核心是"止"和"静"。', advice: '静观其变，不要轻举妄动。', caution: '急躁是大忌。' }
+    }
+  },
+
+  '山火贲': {
+    name: '山火贲',
+    overview: '贲卦火在山下，象征文饰、美化、形式。主事注重形式和外表。',
+    categories: {
+      'career': { judgment: '注重形象和包装。', interpretation: '贲卦代表文饰，事业上要注重形象。', advice: '提升自己的形象和包装。', caution: '但不要只有形式没有内容。' },
+      'love': { judgment: '感情需要仪式感和浪漫。', interpretation: '贲卦在感情上代表需要仪式感。', advice: '创造浪漫，给感情增添仪式感。', caution: '但不要只有形式没有真心。' },
+      'wealth': { judgment: '财运需要包装和推广。', interpretation: '贲卦在财运上代表需要包装。', advice: '做好产品或服务的包装推广。', caution: '但产品本身也要好。' },
+      'health': { judgment: '注意皮肤和外表问题。', interpretation: '贲卦代表外表，要注意皮肤和容貌。', advice: '注意皮肤保养。', caution: '外表好也要内在健康。' },
+      'study': { judgment: '学习要注重表达和呈现。', interpretation: '贲卦在学业上代表要注重表达。', advice: '不仅要学会，还要能表达出来。', caution: '内容和形式都要好。' },
+      'lawsuit': { judgment: '官司注重证据的呈现。', interpretation: '贲卦在诉讼中代表要注重证据的呈现方式。', advice: '把证据组织好，呈现清楚。', caution: '形式要为内容服务。' },
+      'travel': { judgment: '出行宜观光，欣赏美景。', interpretation: '贲卦出行适合观光旅游。', advice: '去看看美丽的风景。', caution: '拍照留念的同时也要享受。' },
+      'lost': { judgment: '物品可能在装饰物或漂亮的地方。', interpretation: '贲卦代表装饰，物品可能在装饰品附近。', advice: '看看装饰柜或漂亮的盒子里。', caution: '可能是因为好看被收起来了。' },
+      'other': { judgment: '事情需要注重形式和包装。', interpretation: '贲卦的核心是"饰"，形式很重要。', advice: '内容好的同时也要注重呈现。', caution: '形式和内容要兼顾。' }
+    }
+  },
+
+  '山天大畜': {
+    name: '山天大畜',
+    overview: '大畜卦天在山中，象征大的积蓄、储备。主事有大的积累，厚积薄发。',
+    categories: {
+      'career': { judgment: '事业有大的积累，可以发展。', interpretation: '大畜卦代表大的积蓄，事业上有很好的积累。', advice: '利用积累，大展宏图。', caution: '积累是为了使用，不要只存不用。' },
+      'love': { judgment: '感情有深厚的基础。', interpretation: '大畜卦在感情上代表感情基础深厚。', advice: '珍惜这份深厚的感情。', caution: '好的感情也需要维护。' },
+      'wealth': { judgment: '财运大吉，有大的积蓄。', interpretation: '大畜卦在财运上代表有大的财富积累。', advice: '继续积累，适时投资。', caution: '财富要会管理。' },
+      'health': { judgment: '身体有好的底子，但不要透支。', interpretation: '大畜卦在健康上代表身体底子好。', advice: '保持良好的底子。', caution: '不要透支身体。' },
+      'study': { judgment: '学业有深厚的积累。', interpretation: '大畜卦在学业上代表学识积累丰厚。', advice: '利用好你的知识积累。', caution: '学以致用。' },
+      'lawsuit': { judgment: '官司有充分的准备和证据。', interpretation: '大畜卦在诉讼中代表准备充分。', advice: '利用好你的准备和证据。', caution: '准备好就要使用。' },
+      'travel': { judgment: '出行准备充分，可以远行。', interpretation: '大畜卦出行准备充分，适合远行。', advice: '可以安排长途旅行。', caution: '准备好了就出发。' },
+      'lost': { judgment: '物品可能在储物处或西北方。', interpretation: '大畜卦代表储蓄，物品可能在储物的地方。', advice: '看看储物柜、仓库或西北方向。', caution: '可能是存放时忘了。' },
+      'other': { judgment: '事情有大的积累，可以行动。', interpretation: '大畜卦的核心是"大的积蓄"，准备充分。', advice: '厚积薄发，时机成熟。', caution: '积累是为了使用。' }
+    }
+  },
+
+  '山泽损': {
+    name: '山泽损',
+    overview: '损卦山在泽上，象征减损、损失、付出。主事有所损失，但损中有益。',
+    categories: {
+      'career': { judgment: '事业有所损失，但是值得的。', interpretation: '损卦代表减损，事业上可能有付出或损失。', advice: '有舍才有得，付出是值得的。', caution: '损失要控制在可承受范围内。' },
+      'love': { judgment: '感情需要付出，有舍有得。', interpretation: '损卦在感情上代表需要付出。', advice: '为感情付出是值得的。', caution: '付出要有回报，不要一味付出。' },
+      'wealth': { judgment: '财运有损失，但可能是必要的投资。', interpretation: '损卦在财运上代表有支出或损失。', advice: '必要的投资是值得的。', caution: '控制损失，不要超出承受能力。' },
+      'health': { judgment: '身体有消耗，需要补充。', interpretation: '损卦在健康上代表身体有消耗。', advice: '注意营养补充和休息。', caution: '不要过度消耗。' },
+      'study': { judgment: '学习需要付出时间和精力。', interpretation: '损卦在学业上代表需要付出努力。', advice: '付出时间和精力是值得的。', caution: '付出要有方法，不要白费力气。' },
+      'lawsuit': { judgment: '官司可能有损失，权衡利弊。', interpretation: '损卦在诉讼中代表可能有损失。', advice: '权衡利弊，控制损失。', caution: '有时候止损也是一种智慧。' },
+      'travel': { judgment: '出行会有花费，但值得。', interpretation: '损卦出行会有支出。', advice: '为旅行付出是值得的。', caution: '控制预算。' },
+      'lost': { judgment: '物品可能真的丢失了。', interpretation: '损卦代表损失，物品可能真的丢了。', advice: '继续找，但也要做好找不到的准备。', caution: '如果找不到，就当是破财免灾。' },
+      'other': { judgment: '事情有所损失，但损中有益。', interpretation: '损卦的核心是"损"，但损是为了益。', advice: '有舍才有得，不要害怕付出。', caution: '控制损失在可承受范围内。' }
+    }
+  },
+
+  '火泽睽': {
+    name: '火泽睽',
+    overview: '睽卦火泽相违，象征乖离、分离、不同。主事有分歧，但小事可成。',
+    categories: {
+      'career': { judgment: '事业有分歧，需要协调。', interpretation: '睽卦代表乖离，事业上可能有分歧。', advice: '求同存异，协调分歧。', caution: '分歧处理不好会影响合作。' },
+      'love': { judgment: '感情有分歧，需要沟通。', interpretation: '睽卦在感情上代表有分歧或误解。', advice: '沟通解决分歧，不要冷战。', caution: '分歧拖久了会变成隔阂。' },
+      'wealth': { judgment: '财运有波动，意见不统一。', interpretation: '睽卦在财运上代表可能在理财上有分歧。', advice: '统一意见再行动。', caution: '不要因为分歧错过机会。' },
+      'health': { judgment: '身体可能有失调的情况。', interpretation: '睽卦在健康上代表身体可能有不协调。', advice: '调理身体，恢复平衡。', caution: '阴阳失调要注意。' },
+      'study': { judgment: '学习可能有困惑或分歧的观点。', interpretation: '睽卦在学业上代表可能遇到困惑。', advice: '多方学习，整合不同观点。', caution: '不要被分歧的观点搞糊涂。' },
+      'lawsuit': { judgment: '官司双方分歧大，难以调解。', interpretation: '睽卦在诉讼中代表双方分歧大。', advice: '寻找共同点，尝试调解。', caution: '分歧太大可能需要裁决。' },
+      'travel': { judgment: '出行可能与同伴有分歧。', interpretation: '睽卦出行可能和同伴意见不统一。', advice: '提前统一意见，或各自行动。', caution: '分歧处理不好会影响旅程。' },
+      'lost': { judgment: '物品可能被分开或在不同的地方。', interpretation: '睽卦代表分离，物品可能被分开了。', advice: '分几个地方找找。', caution: '可能不在一起了。' },
+      'other': { judgment: '事情有分歧，但小事可成。', interpretation: '睽卦的核心是"分"，但小事还是可以做成的。', advice: '求同存异，做能做的事。', caution: '大事需要解决分歧后再进行。' }
+    }
+  },
+
+  '天泽履': {
+    name: '天泽履',
+    overview: '履卦天在泽上，象征履行、谨慎、按规矩办事。主事宜谨慎行事。',
+    categories: {
+      'career': { judgment: '事业宜谨慎，按规矩办事。', interpretation: '履卦代表履行和谨慎，事业上要守规矩。', advice: '按规矩办事，谨慎行事。', caution: '不要越规矩。' },
+      'love': { judgment: '感情宜谨慎推进，不要冒失。', interpretation: '履卦在感情上代表要谨慎。', advice: '一步一步来，不要太冒失。', caution: '急躁可能会出错。' },
+      'wealth': { judgment: '财运宜稳健，不要冒险。', interpretation: '履卦在财运上代表要稳健。', advice: '稳健理财，不要冒险。', caution: '冒险可能会踩坑。' },
+      'health': { judgment: '注意脚部和行走问题。', interpretation: '履卦代表脚和行走，要注意脚部健康。', advice: '注意保护脚，选好鞋子。', caution: '走路要小心，不要摔倒。' },
+      'study': { judgment: '学习要一步一个脚印。', interpretation: '履卦在学业上代表要踏实。', advice: '按步骤学习，不要跳过。', caution: '跳过基础后面会吃亏。' },
+      'lawsuit': { judgment: '官司要按程序走，不要越轨。', interpretation: '履卦在诉讼中代表要按程序。', advice: '按法律程序办事。', caution: '不要走歪门邪道。' },
+      'travel': { judgment: '出行要小心，注意脚下。', interpretation: '履卦出行要谨慎。', advice: '走路小心，选好路线。', caution: '不要冒险走危险的路。' },
+      'lost': { judgment: '物品可能在脚边或走过的路上。', interpretation: '履卦代表脚和路，物品可能在脚边或路上。', advice: '沿着走过的路找找。', caution: '可能是走路时掉的。' },
+      'other': { judgment: '事情要谨慎，按规矩办。', interpretation: '履卦的核心是"谨慎"和"规矩"。', advice: '小心谨慎，按规矩来。', caution: '不要冒失行事。' }
+    }
+  },
+
+  '风泽中孚': {
+    name: '风泽中孚',
+    overview: '中孚卦风在泽上，象征诚信、信任、真诚。主事以诚信为本。',
+    categories: {
+      'career': { judgment: '事业以诚信为本，可获信任。', interpretation: '中孚卦代表诚信，事业上以诚信获得信任。', advice: '诚信待人，会得到认可。', caution: '失信会失去一切。' },
+      'love': { judgment: '感情以真诚为基础，互相信任。', interpretation: '中孚卦在感情上代表真诚和信任。', advice: '真诚相待，建立信任。', caution: '欺骗会毁掉感情。' },
+      'wealth': { judgment: '财运以诚信经营为本。', interpretation: '中孚卦在财运上代表要诚信经营。', advice: '诚信经营，财源自来。', caution: '不诚信会失去客户。' },
+      'health': { judgment: '身心健康需要真诚面对。', interpretation: '中孚卦在健康上代表要真诚面对身体状况。', advice: '真诚面对健康问题，不要讳疾忌医。', caution: '自欺欺人会耽误治疗。' },
+      'study': { judgment: '学习要诚实，不要投机取巧。', interpretation: '中孚卦在学业上代表要诚实学习。', advice: '诚实学习，不要作弊。', caution: '投机取巧终会被发现。' },
+      'lawsuit': { judgment: '官司以诚实为本，如实陈述。', interpretation: '中孚卦在诉讼中代表要诚实。', advice: '如实陈述，不要做假。', caution: '作伪证会受到惩罚。' },
+      'travel': { judgment: '出行以诚待人，会有好遇。', interpretation: '中孚卦出行以诚待人会顺利。', advice: '真诚待人，会遇到好人。', caution: '但也要防止被骗。' },
+      'lost': { judgment: '物品可能被信任的人拿走或保管。', interpretation: '中孚卦代表信任，物品可能被信任的人拿着。', advice: '问问你信任的人。', caution: '可能是被保管起来了。' },
+      'other': { judgment: '事情以诚信为本。', interpretation: '中孚卦的核心是"诚"和"信"。', advice: '真诚待人，以信立身。', caution: '失信失一切。' }
+    }
+  },
+
+  '风山渐': {
+    name: '风山渐',
+    overview: '渐卦风在山上，象征渐进、循序、慢慢来。主事宜循序渐进，不可急躁。',
+    categories: {
+      'career': { judgment: '事业循序渐进，不可急躁。', interpretation: '渐卦代表渐进，事业上要慢慢来。', advice: '一步一步来，不要急于求成。', caution: '急躁反而欲速不达。' },
+      'love': { judgment: '感情循序渐进，水到渠成。', interpretation: '渐卦在感情上代表感情会慢慢发展。', advice: '慢慢培养感情，不要急躁。', caution: '感情急不得。' },
+      'wealth': { judgment: '财运逐渐改善，需要时间。', interpretation: '渐卦在财运上代表财运会逐渐变好。', advice: '耐心等待，财运会来。', caution: '不要想一夜暴富。' },
+      'health': { judgment: '健康逐渐恢复，需要调养。', interpretation: '渐卦在健康上代表身体会逐渐好转。', advice: '慢慢调养，不要急躁。', caution: '康复需要时间。' },
+      'study': { judgment: '学业逐渐进步，不可急躁。', interpretation: '渐卦在学业上代表成绩会逐渐进步。', advice: '按部就班学习，会有进步。', caution: '学习是个渐进的过程。' },
+      'lawsuit': { judgment: '官司逐渐明朗，需要耐心。', interpretation: '渐卦在诉讼中代表案件会逐渐清晰。', advice: '耐心等待，形势会明朗。', caution: '官司急不得。' },
+      'travel': { judgment: '出行宜慢行，不宜赶路。', interpretation: '渐卦出行宜慢不宜快。', advice: '慢慢走，欣赏沿途风景。', caution: '不要赶时间。' },
+      'lost': { judgment: '物品可能会逐渐出现。', interpretation: '渐卦代表渐进，物品可能会慢慢找到。', advice: '不要着急，慢慢找会出现。', caution: '急也没用，慢慢来。' },
+      'other': { judgment: '事情循序渐进，不可急躁。', interpretation: '渐卦的核心是"渐"，一切都要慢慢来。', advice: '按部就班，循序渐进。', caution: '欲速则不达。' }
+    }
+  },
+
+  // ============ 坤宫八卦 ============
+  '坤为地': {
+    name: '坤为地',
+    overview: '坤卦纯阴，象征大地、包容、顺从。六爻皆阴，主事宜柔顺，厚德载物。',
+    categories: {
+      'career': { judgment: '宜辅助，不宜主导。厚德载物。', interpretation: '坤卦代表顺从和包容，事业上宜做辅助角色。', advice: '做好本分，辅助他人。', caution: '不要强出头。' },
+      'love': { judgment: '感情宜柔顺，包容对方。', interpretation: '坤卦在感情上代表要柔顺和包容。', advice: '以柔克刚，包容对方的缺点。', caution: '柔顺但不要失去自我。' },
+      'wealth': { judgment: '财运稳健，宜守不宜攻。', interpretation: '坤卦在财运上代表稳健。', advice: '稳健理财，积少成多。', caution: '不要冒险。' },
+      'health': { judgment: '注意脾胃、消化系统问题。', interpretation: '坤为土为脾胃，要注意消化系统。', advice: '注意饮食，保护脾胃。', caution: '有消化问题要及时就医。' },
+      'study': { judgment: '学习要踏实，厚积薄发。', interpretation: '坤卦在学业上代表要踏实积累。', advice: '扎实基础，厚积薄发。', caution: '不要急于求成。' },
+      'lawsuit': { judgment: '官司宜柔和处理，不宜强硬。', interpretation: '坤卦在诉讼中代表宜柔和。', advice: '以和为贵，能调解就调解。', caution: '强硬可能会适得其反。' },
+      'travel': { judgment: '出行平稳，宜往西南方。', interpretation: '坤卦方位在西南，出行平稳。', advice: '可以放心出行，往西南更好。', caution: '不要急躁。' },
+      'lost': { judgment: '物品可能在地上或西南方。', interpretation: '坤为地，物品可能在地上或西南方向。', advice: '往地上或西南方向找。', caution: '可能掉在地上了。' },
+      'other': { judgment: '事情宜柔顺，厚德载物。', interpretation: '坤卦的核心是"顺"和"厚"。', advice: '以柔克刚，厚德载物。', caution: '不要强出头。' }
+    }
+  },
+
+  '地雷复': {
+    name: '地雷复',
+    overview: '复卦一阳复始，象征恢复、回归、重新开始。主事有转机，否极泰来。',
+    categories: {
+      'career': { judgment: '事业有转机，重新开始。', interpretation: '复卦代表恢复和转机，事业上会有新的开始。', advice: '抓住转机，重新出发。', caution: '新的开始要吸取教训。' },
+      'love': { judgment: '感情有转机，可能复合或重新开始。', interpretation: '复卦在感情上代表可能有复合或新的开始。', advice: '如果想复合，现在是好时机。', caution: '重新开始要改变之前的问题。' },
+      'wealth': { judgment: '财运开始恢复，有新的机会。', interpretation: '复卦在财运上代表财运开始好转。', advice: '抓住新的机会。', caution: '不要重蹈覆辙。' },
+      'health': { judgment: '身体开始恢复，有好转迹象。', interpretation: '复卦在健康上代表身体开始恢复。', advice: '继续调养，会越来越好。', caution: '恢复期不要急躁。' },
+      'study': { judgment: '学业有新的开始，可以重新努力。', interpretation: '复卦在学业上代表可以重新开始。', advice: '从头开始，会有进步。', caution: '吸取之前的教训。' },
+      'lawsuit': { judgment: '官司有转机，可能重审或新证据。', interpretation: '复卦在诉讼中代表可能有转机。', advice: '抓住转机。', caution: '转机要好好把握。' },
+      'travel': { judgment: '适合回程或故地重游。', interpretation: '复卦代表回归，适合返程或重游。', advice: '可以回家或故地重游。', caution: '回归也是一种收获。' },
+      'lost': { judgment: '物品可能会回来或在原来的地方。', interpretation: '复卦代表恢复，物品可能会找到。', advice: '再去原来丢失的地方找找。', caution: '可能会自己出现。' },
+      'other': { judgment: '事情有转机，否极泰来。', interpretation: '复卦的核心是"复"和"归"。', advice: '抓住转机，重新开始。', caution: '吸取教训，不要重蹈覆辙。' }
+    }
+  },
+
+  '地泽临': {
+    name: '地泽临',
+    overview: '临卦地在泽上，象征临近、来临、监督。主事有好事将近。',
+    categories: {
+      'career': { judgment: '事业有好事将近，机会来临。', interpretation: '临卦代表来临，事业上会有好的机会到来。', advice: '准备好迎接机会。', caution: '机会来了要抓住。' },
+      'love': { judgment: '感情有好事将近，可能有人追求。', interpretation: '临卦在感情上代表有好事将近。', advice: '做好准备，可能有人出现。', caution: '好事来了要珍惜。' },
+      'wealth': { judgment: '财运有好事将近，可能有进账。', interpretation: '临卦在财运上代表有好的财运到来。', advice: '准备好接收财富。', caution: '财来要会管理。' },
+      'health': { judgment: '健康有好转的迹象。', interpretation: '临卦在健康上代表身体会好转。', advice: '继续保养，会越来越好。', caution: '好转了也要继续注意。' },
+      'study': { judgment: '学业有进步的迹象，考试临近会有好结果。', interpretation: '临卦在学业上代表会有好的结果。', advice: '认真准备，会有好成绩。', caution: '临近考试不要松懈。' },
+      'lawsuit': { judgment: '官司有好的结果将近。', interpretation: '临卦在诉讼中代表好的结果将近。', advice: '等待好消息。', caution: '结果出来前不要大意。' },
+      'travel': { judgment: '出行有好事，目的地将近。', interpretation: '临卦出行吉利，会顺利到达。', advice: '可以放心出行。', caution: '快到了也不要松懈。' },
+      'lost': { judgment: '物品可能就要找到了。', interpretation: '临卦代表将近，物品可能快找到了。', advice: '继续找，快找到了。', caution: '坚持一下就有希望。' },
+      'other': { judgment: '好事将近，做好准备。', interpretation: '临卦的核心是"临"，好事就要来了。', advice: '做好准备迎接好事。', caution: '好事来了要抓住。' }
+    }
+  },
+
+  '地天泰': {
+    name: '地天泰',
+    overview: '泰卦天地交泰，象征通畅、和顺、亨通。主事大吉大利，诸事顺遂。',
+    categories: {
+      'career': { judgment: '大吉。事业通达，诸事顺利。', interpretation: '泰卦是大吉之卦，事业上会非常顺利。', advice: '把握好时机，大展宏图。', caution: '泰极否来，顺利时要居安思危。' },
+      'love': { judgment: '感情和顺，双方通畅。', interpretation: '泰卦在感情上代表感情非常和顺。', advice: '珍惜这份美好的感情。', caution: '好的感情也要维护。' },
+      'wealth': { judgment: '财运亨通，收益丰厚。', interpretation: '泰卦在财运上代表财运非常好。', advice: '把握机会，积极进取。', caution: '顺利时也要理性。' },
+      'health': { judgment: '身体健康，阴阳调和。', interpretation: '泰卦在健康上代表身体很好。', advice: '保持良好的状态。', caution: '健康也要维护。' },
+      'study': { judgment: '学业顺利，成绩优异。', interpretation: '泰卦在学业上代表学业非常顺利。', advice: '继续努力，会有好成绩。', caution: '顺利时不要骄傲。' },
+      'lawsuit': { judgment: '官司顺利，可能胜诉。', interpretation: '泰卦在诉讼中代表非常有利。', advice: '继续推进，会有好结果。', caution: '即使有利也要认真对待。' },
+      'travel': { judgment: '出行大吉，一路顺风。', interpretation: '泰卦出行大吉大利。', advice: '可以放心出行，会很顺利。', caution: '顺利也要注意安全。' },
+      'lost': { judgment: '物品很可能找回。', interpretation: '泰卦代表通达，物品很可能找到。', advice: '继续找，会有好消息。', caution: '找到后要妥善保管。' },
+      'other': { judgment: '大吉大利，诸事顺遂。', interpretation: '泰卦的核心是"通"和"顺"。', advice: '把握好运，积极进取。', caution: '泰极否来，居安思危。' }
+    }
+  },
+
+  '雷天大壮': {
+    name: '雷天大壮',
+    overview: '大壮卦雷在天上，象征壮大、强盛、有力。主事力量强大，但需防过刚易折。',
+    categories: {
+      'career': { judgment: '事业壮大，力量充足。', interpretation: '大壮卦代表壮大和强盛，事业上力量充足。', advice: '发挥你的优势，积极进取。', caution: '过刚易折，不要太强硬。' },
+      'love': { judgment: '感情强烈，但需要柔情。', interpretation: '大壮卦在感情上代表感情强烈。', advice: '表达爱意，但也要温柔。', caution: '太强势会吓到对方。' },
+      'wealth': { judgment: '财运强劲，有赚钱的能力。', interpretation: '大壮卦在财运上代表财运很强。', advice: '发挥优势，积极赚钱。', caution: '不要过于激进。' },
+      'health': { judgment: '身体强壮，精力充沛。', interpretation: '大壮卦在健康上代表身体很好。', advice: '保持良好的状态。', caution: '不要过度消耗。' },
+      'study': { judgment: '学习能力强，可以挑战难题。', interpretation: '大壮卦在学业上代表学习能力强。', advice: '挑战更高的目标。', caution: '但也不要太急躁。' },
+      'lawsuit': { judgment: '官司有力，可以强势推进。', interpretation: '大壮卦在诉讼中代表你方很有力。', advice: '发挥优势，积极推进。', caution: '但也要有策略。' },
+      'travel': { judgment: '出行有力，可以安排挑战性行程。', interpretation: '大壮卦出行很有力。', advice: '可以安排一些有挑战的行程。', caution: '但也要注意安全。' },
+      'lost': { judgment: '物品可能在显眼或高处。', interpretation: '大壮卦代表壮大，物品可能在显眼的地方。', advice: '往显眼或高处找找。', caution: '可能在你以为不可能的地方。' },
+      'other': { judgment: '事情有力，可以积极推进。', interpretation: '大壮卦的核心是"壮"和"力"。', advice: '发挥优势，但不要过度。', caution: '过刚易折，要有弹性。' }
+    }
+  },
+
+  '泽天夬': {
+    name: '泽天夬',
+    overview: '夬卦泽在天上，象征决断、决裂、果断。主事需要果断决定，排除障碍。',
+    categories: {
+      'career': { judgment: '事业需要果断决策。', interpretation: '夬卦代表决断，事业上需要果断决定。', advice: '果断决策，不要犹豫。', caution: '决断后要坚持执行。' },
+      'love': { judgment: '感情需要果断，该断则断。', interpretation: '夬卦在感情上代表需要做出决定。', advice: '如果该分就分，不要拖泥带水。', caution: '决定后不要反复。' },
+      'wealth': { judgment: '财务需要果断处理。', interpretation: '夬卦在财运上代表需要果断理财。', advice: '该投资就投资，该止损就止损。', caution: '决断要基于分析。' },
+      'health': { judgment: '健康问题需要果断处理。', interpretation: '夬卦在健康上代表有问题要果断处理。', advice: '该治疗就治疗，不要拖延。', caution: '犹豫会耽误病情。' },
+      'study': { judgment: '学习需要果断取舍。', interpretation: '夬卦在学业上代表需要果断选择重点。', advice: '抓住重点，果断取舍。', caution: '不要什么都想学。' },
+      'lawsuit': { judgment: '官司需要果断推进。', interpretation: '夬卦在诉讼中代表需要果断行动。', advice: '该起诉就起诉，该和解就和解。', caution: '决断要快。' },
+      'travel': { judgment: '出行需要果断安排。', interpretation: '夬卦出行需要果断决定。', advice: '说走就走，不要犹豫。', caution: '决定了就执行。' },
+      'lost': { judgment: '物品可能已经丢失，需要决断。', interpretation: '夬卦代表决断，可能需要决定是否继续找。', advice: '如果找不到，要果断放弃。', caution: '不要无谓消耗。' },
+      'other': { judgment: '事情需要果断决定。', interpretation: '夬卦的核心是"决"和"断"。', advice: '该决断时要果断，不要犹豫。', caution: '决断后要坚持。' }
+    }
+  },
+
+  '水天需': {
+    name: '水天需',
+    overview: '需卦水在天上，象征等待、需要、耐心。主事需要等待，时机未到。',
+    categories: {
+      'career': { judgment: '事业需要等待，时机未到。', interpretation: '需卦代表等待，事业上时机还未成熟。', advice: '耐心等待，准备好自己。', caution: '急躁反而不好。' },
+      'love': { judgment: '感情需要等待，缘分未到。', interpretation: '需卦在感情上代表需要等待。', advice: '耐心等待，缘分会来。', caution: '不要强求。' },
+      'wealth': { judgment: '财运需要等待，机会未到。', interpretation: '需卦在财运上代表需要等待时机。', advice: '做好准备，等待机会。', caution: '不要急于投资。' },
+      'health': { judgment: '健康需要调养，等待恢复。', interpretation: '需卦在健康上代表需要时间恢复。', advice: '耐心调养，会好起来的。', caution: '康复需要时间。' },
+      'study': { judgment: '学业需要积累，等待厚积薄发。', interpretation: '需卦在学业上代表需要积累等待。', advice: '继续学习，等待开花结果。', caution: '学习是长期的事。' },
+      'lawsuit': { judgment: '官司需要等待，结果未出。', interpretation: '需卦在诉讼中代表需要等待。', advice: '耐心等待，结果会出来。', caution: '着急也没用。' },
+      'travel': { judgment: '出行需要等待合适的时机。', interpretation: '需卦出行可能需要等待。', advice: '等天气或条件好了再出发。', caution: '不要急于出行。' },
+      'lost': { judgment: '物品需要等待，可能会自己出现。', interpretation: '需卦代表等待，物品可能会自己出现。', advice: '不要急，等等看。', caution: '有时候等待是最好的方法。' },
+      'other': { judgment: '事情需要等待，时机未到。', interpretation: '需卦的核心是"等"和"需"。', advice: '耐心等待，准备好自己。', caution: '时机成熟自然水到渠成。' }
+    }
+  },
+
+  '水地比': {
+    name: '水地比',
+    overview: '比卦水在地上，象征亲比、合作、团结。主事宜合作，亲密无间。',
+    categories: {
+      'career': { judgment: '事业宜合作，团结同事。', interpretation: '比卦代表亲近和合作，事业上要团结合作。', advice: '与同事搞好关系，合作共赢。', caution: '合作要选对人。' },
+      'love': { judgment: '感情亲密，双方亲近。', interpretation: '比卦在感情上代表亲密无间。', advice: '珍惜亲密的感情，继续靠近。', caution: '亲近也要保持尊重。' },
+      'wealth': { judgment: '财运宜合作，共同发展。', interpretation: '比卦在财运上代表合作有利。', advice: '可以与人合作投资或经营。', caution: '合作要选择可信的人。' },
+      'health': { judgment: '健康需要亲人的关心和支持。', interpretation: '比卦在健康上代表需要家人朋友的支持。', advice: '让关心你的人帮助你。', caution: '不要一个人扛着。' },
+      'study': { judgment: '学习宜找学习伙伴，互相帮助。', interpretation: '比卦在学业上代表宜合作学习。', advice: '找学习伙伴，互相帮助。', caution: '合作学习要真正学。' },
+      'lawsuit': { judgment: '官司宜联合他人，增强力量。', interpretation: '比卦在诉讼中代表可以联合其他人。', advice: '寻找同盟，增强力量。', caution: '联合要选对人。' },
+      'travel': { judgment: '出行宜结伴，互相照应。', interpretation: '比卦出行适合结伴同行。', advice: '约上伙伴一起出行。', caution: '结伴也要注意个人空间。' },
+      'lost': { judgment: '物品可能在亲近的人那里或熟悉的地方。', interpretation: '比卦代表亲近，物品可能在亲近的人或地方。', advice: '问问亲近的人，或在熟悉的地方找。', caution: '可能是亲人帮你收起来了。' },
+      'other': { judgment: '事情宜合作，亲密团结。', interpretation: '比卦的核心是"比"和"亲"。', advice: '与人合作，亲密团结。', caution: '亲近但要有分寸。' }
+    }
+  },
 };
 
 /**

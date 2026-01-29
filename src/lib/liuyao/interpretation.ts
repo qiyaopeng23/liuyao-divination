@@ -19,6 +19,7 @@ import { analyzeProsperity, getProsperityLevel } from './prosperity';
 import { LIU_SHEN_MEANINGS } from './liushen';
 import { DI_ZHI_CHONG, DI_ZHI } from './constants';
 import { findFutureDatesWithZhi, findFutureMonthsWithZhi, formatDateShort, formatDateChinese } from './ganzhi';
+import { getHexagramCategoryInterpretation, getHexagramOverview } from './hexagram-interpretations';
 
 /**
  * 生成完整解卦结果
@@ -778,7 +779,13 @@ function getActionAdvice(
   trend: TrendJudgment,
   questionCategory: QuestionCategory,
   yongShenStrong: boolean,
+  hexagramAdvice?: string,
 ): string {
+  // 如果有卦象专属建议，优先使用
+  if (hexagramAdvice) {
+    return `【行动建议】${hexagramAdvice}`;
+  }
+
   const adviceMap: Record<QuestionCategory, Record<TrendJudgment, string>> = {
     'career': {
       'very_favorable': '【行动建议】现在是行动的好时机。可以主动争取机会、提交申请、与上级沟通想法。把握这段有利时期，积极推进工作计划。',
@@ -926,10 +933,42 @@ function generateSummary(
     summaryPlain += '有利和不利因素并存，需要根据具体情况灵活应对。';
   }
 
+  // 添加卦象专属解读
+  const hexagramInterpretation = getHexagramCategoryInterpretation(primaryGua.name, questionCategory);
+  if (hexagramInterpretation) {
+    summaryPlain += `\n\n【${primaryGua.name}对此事的启示】\n`;
+    summaryPlain += `断语：${hexagramInterpretation.judgment}\n`;
+    summaryPlain += hexagramInterpretation.interpretation;
+    if (hexagramInterpretation.caution) {
+      summaryPlain += `\n⚠️ 注意：${hexagramInterpretation.caution}`;
+    }
+
+    // 也添加到技术层
+    summaryTechnical += `\n${primaryGua.name}于${getQuestionCategoryName(questionCategory)}：${hexagramInterpretation.judgment}`;
+  }
+
   // 添加具体的行动建议
-  summaryPlain += '\n\n' + getActionAdvice(trend, questionCategory, yongShenStrong);
+  summaryPlain += '\n\n' + getActionAdvice(trend, questionCategory, yongShenStrong, hexagramInterpretation?.advice);
 
   return { summaryPlain, summaryTechnical };
+}
+
+/**
+ * 获取问事类别名称
+ */
+function getQuestionCategoryName(category: QuestionCategory): string {
+  const names: Record<QuestionCategory, string> = {
+    'career': '事业工作',
+    'love': '感情婚姻',
+    'wealth': '财运',
+    'health': '健康',
+    'study': '学业考试',
+    'lawsuit': '诉讼官司',
+    'travel': '出行',
+    'lost': '失物寻人',
+    'other': '其他',
+  };
+  return names[category];
 }
 
 /**
