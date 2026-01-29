@@ -8,7 +8,7 @@
  */
 
 import type {
-  QuestionCategory, LiuQin, YaoInfo, YongShenInfo, ReasonItem,
+  QuestionCategory, LiuQin, YaoInfo, YongShenInfo, ReasonItem, YongShenTarget,
 } from './types';
 import { YONG_SHEN_RULES } from './constants';
 import { findYaoByLiuQin, getWorldYao, getResponseYao } from './najia';
@@ -86,15 +86,38 @@ export function selectYongShen(
     return createWorldYongShen(yaoInfos);
   }
 
-  // 根据规则获取用神六亲
-  let primaryLiuQin = rule.primary;
+  // 根据规则获取用神
+  const primaryTarget = rule.primary;
 
-  // 处理特殊情况：用神是"世爻"或"应爻"
-  if (primaryLiuQin === '用神' as unknown as LiuQin) {
+  // 处理特殊情况
+  if (primaryTarget === '世爻') {
+    return createWorldYongShen(yaoInfos);
+  }
+
+  if (primaryTarget === '应爻') {
+    const responseYao = getResponseYao(yaoInfos);
+    if (responseYao) {
+      return {
+        liuQin: responseYao.liuQin,
+        positions: [responseYao.position],
+        reason: rule.description,
+        isAutoSelected: true,
+      };
+    }
+    return createWorldYongShen(yaoInfos);
+  }
+
+  if (primaryTarget === '用神') {
     // 代问他人时，需要根据关系确定用神
     // 这里简化处理，默认返回世爻
     return createWorldYongShen(yaoInfos);
   }
+
+  // 普通六亲用神
+  const primaryLiuQin = primaryTarget as LiuQin;
+  const secondaryLiuQin = rule.secondary && !['世爻', '应爻', '用神'].includes(rule.secondary)
+    ? rule.secondary as LiuQin
+    : undefined;
 
   // 查找用神所在的爻位
   const yongShenYaos = findYaoByLiuQin(yaoInfos, primaryLiuQin);
@@ -107,8 +130,8 @@ export function selectYongShen(
       positions: [],
       reason: `${rule.description}，但用神${primaryLiuQin}不在卦中显现，需查伏神`,
       isAutoSelected: true,
-      alternatives: rule.secondary ? [{
-        liuQin: rule.secondary,
+      alternatives: secondaryLiuQin ? [{
+        liuQin: secondaryLiuQin,
         reason: `备选用神`,
       }] : undefined,
     };
@@ -119,8 +142,8 @@ export function selectYongShen(
     positions: yongShenYaos.map(y => y.position),
     reason: rule.description,
     isAutoSelected: true,
-    alternatives: rule.secondary ? [{
-      liuQin: rule.secondary,
+    alternatives: secondaryLiuQin ? [{
+      liuQin: secondaryLiuQin,
       reason: `备选用神`,
     }] : undefined,
   };

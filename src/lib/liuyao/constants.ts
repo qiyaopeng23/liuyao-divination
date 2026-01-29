@@ -7,7 +7,7 @@
 
 import type {
   TianGan, DiZhi, WuXing, BaGua, LiuQin, LiuShen,
-  GuaInfo, YinYang, ProsperityState
+  GuaInfo, YinYang, ProsperityState, YongShenTarget
 } from './types';
 
 // ==================== 天干地支 ====================
@@ -391,7 +391,7 @@ export const GUA_64_DATA: Record<string, Omit<GuaInfo, 'binary'>> = {
  * 用神取法表（按问事类别）
  * 来源：《增删卜易》
  */
-export const YONG_SHEN_RULES: Record<string, { primary: LiuQin; secondary?: LiuQin; description: string }> = {
+export const YONG_SHEN_RULES: Record<string, { primary: YongShenTarget; secondary?: YongShenTarget; description: string }> = {
   // 事业工作
   'career_job': { primary: '官鬼', description: '求官、求职以官鬼为用神' },
   'career_business': { primary: '妻财', description: '经商求财以妻财为用神' },

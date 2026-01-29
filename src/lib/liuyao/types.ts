@@ -99,6 +99,9 @@ export type ChangeType =
 /** 六亲 */
 export type LiuQin = '父母' | '兄弟' | '子孙' | '妻财' | '官鬼';
 
+/** 用神取法类型（六亲 + 特殊位置） */
+export type YongShenTarget = LiuQin | '世爻' | '应爻' | '用神';
+
 /** 六神 */
 export type LiuShen = '青龙' | '朱雀' | '勾陈' | '螣蛇' | '白虎' | '玄武';
 
