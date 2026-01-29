@@ -159,7 +159,7 @@ export function castHexagram(input: CastingInput): DivinationResult {
     ruleDescription: '根据问事类别确定用神',
     data: {
       questionCategory: input.questionCategory,
-      subType: defaultSubType,
+      subType: questionSubType,
       yongShen,
     },
     conclusion: `用神：${yongShen.liuQin}（${yongShen.reason}）`,
