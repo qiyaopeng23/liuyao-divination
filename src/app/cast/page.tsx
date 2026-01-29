@@ -86,22 +86,28 @@ function CastPageContent() {
     }
   }, [searchParams]);
 
-  // 选择问事类别
+  // 选择问事类别（不再自动跳转）
   const handleCategorySelect = (cat: QuestionCategory) => {
     setCategory(cat);
-    // 检查是否需要二级选择
-    if (SUBTYPE_OPTIONS[cat]) {
-      setStep('subtype');
-    } else {
+    // 如果切换了类别，清空之前的二级选择
+    if (cat !== category) {
       setSubType(null);
-      setStep('cast');
     }
   };
 
-  // 选择二级类型
+  // 选择二级类型（不再自动跳转）
   const handleSubTypeSelect = (value: string) => {
     setSubType(value);
-    setStep('cast');
+  };
+
+  // 开始测算按钮点击
+  const handleStartCasting = () => {
+    // 检查是否需要二级选择
+    if (SUBTYPE_OPTIONS[category] && !subType) {
+      setStep('subtype');
+    } else {
+      setStep('cast');
+    }
   };
 
   // 铜钱法完成
@@ -311,6 +317,18 @@ function CastPageContent() {
                   </div>
                 </CardContent>
               </Card>
+
+              {/* 开始测算按钮 */}
+              <div className="text-center mt-8">
+                <Button
+                  size="lg"
+                  className="px-12 py-6 text-lg"
+                  onClick={handleStartCasting}
+                >
+                  开始测算
+                  <ChevronRight className="w-5 h-5 ml-2" />
+                </Button>
+              </div>
             </motion.div>
           )}
 
@@ -334,7 +352,10 @@ function CastPageContent() {
                 {SUBTYPE_OPTIONS[category]!.map((option) => (
                   <Card
                     key={option.value}
-                    className="cursor-pointer card-hover transition-all w-40"
+                    className={cn(
+                      'cursor-pointer card-hover transition-all w-40',
+                      subType === option.value && 'border-primary ring-2 ring-primary/20'
+                    )}
                     onClick={() => handleSubTypeSelect(option.value)}
                   >
                     <CardContent className="p-5 text-center">
@@ -348,7 +369,16 @@ function CastPageContent() {
                 ))}
               </div>
 
-              <div className="text-center">
+              <div className="flex flex-col items-center gap-4 mt-8">
+                <Button
+                  size="lg"
+                  className="px-12 py-6 text-lg"
+                  onClick={() => setStep('cast')}
+                  disabled={!subType}
+                >
+                  继续
+                  <ChevronRight className="w-5 h-5 ml-2" />
+                </Button>
                 <Button variant="ghost" onClick={() => setStep('category')}>
                   <ArrowLeft className="w-4 h-4 mr-1" />
                   返回选择问题
@@ -407,81 +437,116 @@ function CastPageContent() {
             </motion.div>
           )}
 
-          {/* 处理中 - 沉浸式计算动画 */}
-          {isProcessing && (
-            <motion.div
-              key="processing"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="flex flex-col items-center justify-center py-16"
-            >
-              {/* 八卦图旋转动画 */}
-              <div className="relative w-32 h-32 mb-8">
-                <motion.div
-                  className="absolute inset-0 rounded-full border-4 border-primary/30"
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
-                />
-                <motion.div
-                  className="absolute inset-2 rounded-full border-4 border-primary/50"
-                  animate={{ rotate: -360 }}
-                  transition={{ duration: 6, repeat: Infinity, ease: 'linear' }}
-                />
-                <motion.div
-                  className="absolute inset-4 rounded-full border-4 border-primary/70"
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
-                />
-                {/* 中心太极图样式 */}
-                <div className="absolute inset-6 rounded-full bg-gradient-to-br from-primary/80 to-primary/40 flex items-center justify-center">
-                  <motion.div
-                    className="text-2xl text-primary-foreground font-serif"
-                    animate={{ scale: [1, 1.1, 1] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  >
-                    ☯
-                  </motion.div>
-                </div>
-              </div>
-
-              {/* 计算阶段文字 */}
-              <motion.div
-                key={calculationPhase}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="text-center space-y-2"
-              >
-                <p className="text-lg font-medium text-foreground">
-                  {calculationPhase || '准备中...'}
-                </p>
-                <p className="text-sm text-muted-foreground">
-                  请稍候，正在为您推演卦象...
-                </p>
-              </motion.div>
-
-              {/* 进度点 */}
-              <div className="flex gap-2 mt-6">
-                {[0, 1, 2].map((i) => (
-                  <motion.div
-                    key={i}
-                    className="w-2 h-2 rounded-full bg-primary"
-                    animate={{
-                      scale: [1, 1.5, 1],
-                      opacity: [0.5, 1, 0.5],
-                    }}
-                    transition={{
-                      duration: 1.5,
-                      repeat: Infinity,
-                      delay: i * 0.3,
-                    }}
-                  />
-                ))}
-              </div>
-            </motion.div>
-          )}
         </AnimatePresence>
       </div>
+
+      {/* 处理中 - 全屏沉浸式计算动画 */}
+      <AnimatePresence>
+        {isProcessing && (
+          <motion.div
+            key="processing-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-background flex flex-col items-center justify-center"
+          >
+            {/* 背景装饰 */}
+            <div className="absolute inset-0 overflow-hidden">
+              <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+              <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+            </div>
+
+            {/* 八卦图旋转动画 - 更大更明显 */}
+            <div className="relative w-48 h-48 md:w-64 md:h-64 mb-12">
+              <motion.div
+                className="absolute inset-0 rounded-full border-4 border-primary/20"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 12, repeat: Infinity, ease: 'linear' }}
+              />
+              <motion.div
+                className="absolute inset-4 rounded-full border-4 border-primary/30"
+                animate={{ rotate: -360 }}
+                transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
+              />
+              <motion.div
+                className="absolute inset-8 rounded-full border-4 border-primary/50"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+              />
+              <motion.div
+                className="absolute inset-12 rounded-full border-4 border-primary/70"
+                animate={{ rotate: -360 }}
+                transition={{ duration: 6, repeat: Infinity, ease: 'linear' }}
+              />
+              {/* 中心太极图 */}
+              <div className="absolute inset-16 md:inset-20 rounded-full bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center shadow-2xl">
+                <motion.div
+                  className="text-4xl md:text-5xl text-primary-foreground font-serif"
+                  animate={{ scale: [1, 1.15, 1], rotate: [0, 180, 360] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                >
+                  ☯
+                </motion.div>
+              </div>
+
+              {/* 八卦符号环绕 */}
+              {['☰', '☱', '☲', '☳', '☴', '☵', '☶', '☷'].map((trigram, i) => (
+                <motion.div
+                  key={trigram}
+                  className="absolute text-2xl md:text-3xl text-primary/60"
+                  style={{
+                    top: '50%',
+                    left: '50%',
+                    transform: `translate(-50%, -50%) rotate(${i * 45}deg) translateY(-120px) rotate(-${i * 45}deg)`,
+                  }}
+                  animate={{ opacity: [0.3, 0.8, 0.3] }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    delay: i * 0.25,
+                  }}
+                >
+                  {trigram}
+                </motion.div>
+              ))}
+            </div>
+
+            {/* 计算阶段文字 */}
+            <motion.div
+              key={calculationPhase}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-center space-y-3 relative z-10"
+            >
+              <p className="text-2xl md:text-3xl font-bold text-foreground">
+                {calculationPhase || '准备中...'}
+              </p>
+              <p className="text-base md:text-lg text-muted-foreground">
+                请稍候，正在为您推演卦象...
+              </p>
+            </motion.div>
+
+            {/* 进度点 */}
+            <div className="flex gap-3 mt-8">
+              {[0, 1, 2, 3, 4].map((i) => (
+                <motion.div
+                  key={i}
+                  className="w-3 h-3 rounded-full bg-primary"
+                  animate={{
+                    scale: [1, 1.5, 1],
+                    opacity: [0.3, 1, 0.3],
+                  }}
+                  transition={{
+                    duration: 1.5,
+                    repeat: Infinity,
+                    delay: i * 0.2,
+                  }}
+                />
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
