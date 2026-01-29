@@ -151,8 +151,8 @@ export function castHexagram(input: CastingInput): DivinationResult {
   }
 
   // 9. 选取用神
-  const defaultSubType = getDefaultSubType(input.questionCategory);
-  const yongShen = selectYongShen(primaryYaoInfos, defaultSubType);
+  const defaultSubType = getDefaultSubType(input.questionCategory, input.gender);
+  const yongShen = selectYongShen(primaryYaoInfos, defaultSubType, input.gender);
 
   reasoningChain.push({
     ruleName: '用神选取',
@@ -203,7 +203,15 @@ export function castHexagram(input: CastingInput): DivinationResult {
 /**
  * 获取问事类别的默认细分类型
  */
-function getDefaultSubType(category: QuestionCategory): string {
+function getDefaultSubType(category: QuestionCategory, gender?: 'male' | 'female'): string {
+  // 感情类问题根据性别选择不同的用神
+  if (category === 'love') {
+    if (gender === 'female') {
+      return 'love_female';  // 女问婚恋以官鬼为用神
+    }
+    return 'love_male';  // 男问婚恋以妻财为用神
+  }
+
   const subtypes = QUESTION_SUBTYPES[category];
   if (subtypes && subtypes.length > 0) {
     return subtypes[0].subType;

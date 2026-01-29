@@ -44,9 +44,10 @@ function CastPageContent() {
   const router = useRouter();
 
   // 状态
-  const [step, setStep] = useState<'category' | 'cast' | 'result'>('category');
+  const [step, setStep] = useState<'category' | 'gender' | 'cast' | 'result'>('category');
   const [method, setMethod] = useState<CastingMethod>('coin');
   const [category, setCategory] = useState<QuestionCategory>('other');
+  const [gender, setGender] = useState<'male' | 'female' | null>(null);
   const [yaoStates, setYaoStates] = useState<YaoState[]>([]);
   const [result, setResult] = useState<DivinationResult | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -62,6 +63,17 @@ function CastPageContent() {
   // 选择问事类别
   const handleCategorySelect = (cat: QuestionCategory) => {
     setCategory(cat);
+    // 感情类问题需要选择性别
+    if (cat === 'love') {
+      setStep('gender');
+    } else {
+      setStep('cast');
+    }
+  };
+
+  // 选择性别
+  const handleGenderSelect = (g: 'male' | 'female') => {
+    setGender(g);
     setStep('cast');
   };
 
@@ -96,6 +108,7 @@ function CastPageContent() {
         yaoStates: states as [YaoState, YaoState, YaoState, YaoState, YaoState, YaoState],
         time: createCastingTime(new Date()),
         questionCategory: category,
+        gender: gender || undefined,
       };
 
       const divinationResult = castHexagram(input);
@@ -110,6 +123,7 @@ function CastPageContent() {
     setStep('category');
     setYaoStates([]);
     setResult(null);
+    setGender(null);
   };
 
   return (
@@ -135,7 +149,13 @@ function CastPageContent() {
         {/* 进度指示 */}
         <div className="flex items-center justify-center gap-2 mb-8">
           {['选择问题', '起卦', '查看结果'].map((label, index) => {
-            const stepIndex = ['category', 'cast', 'result'].indexOf(step);
+            const stepMapping: Record<string, number> = {
+              'category': 0,
+              'gender': 0,
+              'cast': 1,
+              'result': 2,
+            };
+            const stepIndex = stepMapping[step] ?? 0;
             const isActive = index === stepIndex;
             const isComplete = index < stepIndex;
 
@@ -231,6 +251,59 @@ function CastPageContent() {
                   </div>
                 </CardContent>
               </Card>
+            </motion.div>
+          )}
+
+          {/* 步骤1.5：选择性别（仅感情类） */}
+          {step === 'gender' && (
+            <motion.div
+              key="gender"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              className="space-y-6"
+            >
+              <div className="text-center">
+                <h1 className="text-2xl font-bold mb-2">请选择您的性别</h1>
+                <p className="text-muted-foreground">
+                  感情类问题需要根据性别选择不同的用神
+                </p>
+              </div>
+
+              <div className="flex justify-center gap-6">
+                <Card
+                  className="cursor-pointer card-hover transition-all w-40"
+                  onClick={() => handleGenderSelect('male')}
+                >
+                  <CardContent className="p-6 text-center">
+                    <div className="text-5xl mb-3">👨</div>
+                    <div className="font-medium text-lg">男生</div>
+                    <p className="text-sm text-muted-foreground mt-2">
+                      以妻财为用神
+                    </p>
+                  </CardContent>
+                </Card>
+
+                <Card
+                  className="cursor-pointer card-hover transition-all w-40"
+                  onClick={() => handleGenderSelect('female')}
+                >
+                  <CardContent className="p-6 text-center">
+                    <div className="text-5xl mb-3">👩</div>
+                    <div className="font-medium text-lg">女生</div>
+                    <p className="text-sm text-muted-foreground mt-2">
+                      以官鬼为用神
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+
+              <div className="text-center">
+                <Button variant="ghost" onClick={() => setStep('category')}>
+                  <ArrowLeft className="w-4 h-4 mr-1" />
+                  返回选择问题
+                </Button>
+              </div>
             </motion.div>
           )}
 

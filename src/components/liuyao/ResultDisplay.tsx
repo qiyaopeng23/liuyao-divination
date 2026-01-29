@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { toPng } from 'html-to-image';
 import { cn } from '@/lib/utils';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -21,6 +22,8 @@ import {
   CheckCircle,
   Clock,
   ArrowRight,
+  Check,
+  Copy,
 } from 'lucide-react';
 
 interface ResultDisplayProps {
@@ -206,13 +209,67 @@ export const ResultDisplay: React.FC<ResultDisplayProps> = ({ result, className 
   const [isExpertMode, setIsExpertMode] = useState(false);
   const [showHexagram, setShowHexagram] = useState(true);
   const [showAnalysis, setShowAnalysis] = useState(true);
+  const [shareStatus, setShareStatus] = useState<'idle' | 'copied'>('idle');
+  const [exportStatus, setExportStatus] = useState<'idle' | 'exporting' | 'done'>('idle');
+  const resultRef = useRef<HTMLDivElement>(null);
 
   const trendInfo = getTrendText(result.interpretation.trend);
+
+  // 分享功能
+  const handleShare = async () => {
+    const url = window.location.href;
+    const title = `六爻占卜结果 - ${result.primaryGua.name}`;
+    const text = `我的占卜结果是「${result.primaryGua.name}」，整体趋势：${trendInfo.plain}`;
+
+    // 尝试使用原生分享 API（移动端）
+    if (navigator.share) {
+      try {
+        await navigator.share({ title, text, url });
+        return;
+      } catch (err) {
+        // 用户取消或不支持，回退到复制链接
+      }
+    }
+
+    // 复制链接到剪贴板
+    try {
+      await navigator.clipboard.writeText(url);
+      setShareStatus('copied');
+      setTimeout(() => setShareStatus('idle'), 2000);
+    } catch (err) {
+      alert('复制失败，请手动复制网址');
+    }
+  };
+
+  // 导出为图片
+  const handleExport = async () => {
+    if (!resultRef.current) return;
+
+    setExportStatus('exporting');
+    try {
+      const dataUrl = await toPng(resultRef.current, {
+        backgroundColor: '#ffffff',
+        pixelRatio: 2,
+      });
+
+      // 下载图片
+      const link = document.createElement('a');
+      link.download = `六爻占卜-${result.primaryGua.name}-${new Date().toLocaleDateString('zh-CN')}.png`;
+      link.href = dataUrl;
+      link.click();
+
+      setExportStatus('done');
+      setTimeout(() => setExportStatus('idle'), 2000);
+    } catch (err) {
+      alert('导出失败，请重试');
+      setExportStatus('idle');
+    }
+  };
 
   return (
     <div className={cn('space-y-6', className)}>
       {/* 模式切换 */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between flex-wrap gap-2">
         <div className="flex items-center gap-2">
           <Button
             variant={isExpertMode ? 'outline' : 'default'}
@@ -232,16 +289,44 @@ export const ResultDisplay: React.FC<ResultDisplayProps> = ({ result, className 
           </Button>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="ghost" size="sm">
-            <Share2 className="w-4 h-4 mr-1" />
-            分享
+          <Button variant="ghost" size="sm" onClick={handleShare}>
+            {shareStatus === 'copied' ? (
+              <>
+                <Check className="w-4 h-4 mr-1 text-green-500" />
+                已复制
+              </>
+            ) : (
+              <>
+                <Share2 className="w-4 h-4 mr-1" />
+                分享
+              </>
+            )}
           </Button>
-          <Button variant="ghost" size="sm">
-            <Download className="w-4 h-4 mr-1" />
-            导出
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={handleExport}
+            disabled={exportStatus === 'exporting'}
+          >
+            {exportStatus === 'exporting' ? (
+              <>正在导出...</>
+            ) : exportStatus === 'done' ? (
+              <>
+                <Check className="w-4 h-4 mr-1 text-green-500" />
+                已保存
+              </>
+            ) : (
+              <>
+                <Download className="w-4 h-4 mr-1" />
+                导出图片
+              </>
+            )}
           </Button>
         </div>
       </div>
+
+      {/* 可导出区域 */}
+      <div ref={resultRef} className="space-y-6 bg-background p-1">
 
       {/* 总断卡片 */}
       <Card className="border-2 border-primary/20">
@@ -464,6 +549,7 @@ export const ResultDisplay: React.FC<ResultDisplayProps> = ({ result, className 
         <p>本系统基于传统六爻规则进行分析，提供的是「结构化判断参考」，不是命令。</p>
         <p>您始终保有决策权。本系统不提供医疗、法律、投资等专业领域的确定性建议。</p>
       </div>
+      </div>{/* 结束可导出区域 */}
     </div>
   );
 };

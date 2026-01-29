@@ -367,6 +367,8 @@ export interface CastingInput {
   questionCategory: QuestionCategory;
   /** 问事内容（可选，不存储） */
   questionText?: string;
+  /** 性别（用于感情类问题） */
+  gender?: 'male' | 'female';
 }
 
 /** 完整的卦例结果 */
