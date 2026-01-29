@@ -372,6 +372,8 @@ export interface CastingInput {
   questionText?: string;
   /** 性别（用于感情类问题） */
   gender?: GenderOption;
+  /** 问事细分类型 */
+  subType?: string;
 }
 
 /** 完整的卦例结果 */

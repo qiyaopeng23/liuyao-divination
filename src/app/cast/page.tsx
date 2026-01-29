@@ -44,13 +44,39 @@ function CastPageContent() {
   const router = useRouter();
 
   // 状态
-  const [step, setStep] = useState<'category' | 'gender' | 'cast' | 'result'>('category');
+  const [step, setStep] = useState<'category' | 'subtype' | 'cast' | 'result'>('category');
   const [method, setMethod] = useState<CastingMethod>('coin');
   const [category, setCategory] = useState<QuestionCategory>('other');
-  const [gender, setGender] = useState<'male' | 'female' | 'same_sex' | null>(null);
+  const [subType, setSubType] = useState<string | null>(null);
   const [yaoStates, setYaoStates] = useState<YaoState[]>([]);
   const [result, setResult] = useState<DivinationResult | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
+
+  // 需要二级选择的类别配置
+  const SUBTYPE_OPTIONS: Partial<Record<QuestionCategory, Array<{
+    value: string;
+    label: string;
+    emoji: string;
+    description: string;
+  }>>> = {
+    'career': [
+      { value: 'job', label: '求职/工作', emoji: '👔', description: '找工作、面试、升职' },
+      { value: 'business', label: '经商/创业', emoji: '🏪', description: '做生意、开店、投资项目' },
+    ],
+    'love': [
+      { value: 'male', label: '男生问感情', emoji: '👨', description: '以妻财为用神' },
+      { value: 'female', label: '女生问感情', emoji: '👩', description: '以官鬼为用神' },
+      { value: 'same_sex', label: '同性感情', emoji: '🌈', description: '以应爻为对方' },
+    ],
+    'health': [
+      { value: 'self', label: '问自己', emoji: '🙋', description: '自己的健康问题' },
+      { value: 'other', label: '问他人', emoji: '👨‍👩‍👧', description: '代问家人/朋友的健康' },
+    ],
+    'lost': [
+      { value: 'item', label: '寻物', emoji: '📦', description: '丢失的物品' },
+      { value: 'person', label: '寻人', emoji: '🧑', description: '失联的人' },
+    ],
+  };
 
   // 从 URL 获取起卦方式
   useEffect(() => {
@@ -63,17 +89,18 @@ function CastPageContent() {
   // 选择问事类别
   const handleCategorySelect = (cat: QuestionCategory) => {
     setCategory(cat);
-    // 感情类问题需要选择性别
-    if (cat === 'love') {
-      setStep('gender');
+    // 检查是否需要二级选择
+    if (SUBTYPE_OPTIONS[cat]) {
+      setStep('subtype');
     } else {
+      setSubType(null);
       setStep('cast');
     }
   };
 
-  // 选择性别/感情类型
-  const handleGenderSelect = (g: 'male' | 'female' | 'same_sex') => {
-    setGender(g);
+  // 选择二级类型
+  const handleSubTypeSelect = (value: string) => {
+    setSubType(value);
     setStep('cast');
   };
 
@@ -125,12 +152,19 @@ function CastPageContent() {
         }, phases[currentIndex].delay);
       } else {
         // 所有阶段完成，执行实际计算
+        // 将 subType 转换为 gender（感情类）或直接使用
+        let gender: 'male' | 'female' | 'same_sex' | undefined;
+        if (category === 'love' && subType) {
+          gender = subType as 'male' | 'female' | 'same_sex';
+        }
+
         const input = {
           method,
           yaoStates: states as [YaoState, YaoState, YaoState, YaoState, YaoState, YaoState],
           time: createCastingTime(new Date()),
           questionCategory: category,
-          gender: gender || undefined,
+          gender,
+          subType: subType || undefined,
         };
 
         const divinationResult = castHexagram(input);
@@ -149,7 +183,7 @@ function CastPageContent() {
     setStep('category');
     setYaoStates([]);
     setResult(null);
-    setGender(null);
+    setSubType(null);
   };
 
   return (
@@ -280,61 +314,38 @@ function CastPageContent() {
             </motion.div>
           )}
 
-          {/* 步骤1.5：选择性别/感情类型（仅感情类） */}
-          {step === 'gender' && (
+          {/* 步骤1.5：二级选择（部分类别需要） */}
+          {step === 'subtype' && SUBTYPE_OPTIONS[category] && (
             <motion.div
-              key="gender"
+              key="subtype"
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               className="space-y-6"
             >
               <div className="text-center">
-                <h1 className="text-2xl font-bold mb-2">请选择您的情况</h1>
+                <h1 className="text-2xl font-bold mb-2">请选择具体情况</h1>
                 <p className="text-muted-foreground">
-                  感情类问题需要根据情况选择不同的分析方式
+                  {QUESTION_CATEGORIES.find(c => c.value === category)?.label} - 不同情况分析方式不同
                 </p>
               </div>
 
               <div className="flex flex-wrap justify-center gap-4">
-                <Card
-                  className="cursor-pointer card-hover transition-all w-36"
-                  onClick={() => handleGenderSelect('male')}
-                >
-                  <CardContent className="p-5 text-center">
-                    <div className="text-4xl mb-2">👨</div>
-                    <div className="font-medium">男生问感情</div>
-                    <p className="text-xs text-muted-foreground mt-1">
-                      以妻财为用神
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card
-                  className="cursor-pointer card-hover transition-all w-36"
-                  onClick={() => handleGenderSelect('female')}
-                >
-                  <CardContent className="p-5 text-center">
-                    <div className="text-4xl mb-2">👩</div>
-                    <div className="font-medium">女生问感情</div>
-                    <p className="text-xs text-muted-foreground mt-1">
-                      以官鬼为用神
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card
-                  className="cursor-pointer card-hover transition-all w-36"
-                  onClick={() => handleGenderSelect('same_sex')}
-                >
-                  <CardContent className="p-5 text-center">
-                    <div className="text-4xl mb-2">🌈</div>
-                    <div className="font-medium">同性感情</div>
-                    <p className="text-xs text-muted-foreground mt-1">
-                      以应爻为对方
-                    </p>
-                  </CardContent>
-                </Card>
+                {SUBTYPE_OPTIONS[category]!.map((option) => (
+                  <Card
+                    key={option.value}
+                    className="cursor-pointer card-hover transition-all w-40"
+                    onClick={() => handleSubTypeSelect(option.value)}
+                  >
+                    <CardContent className="p-5 text-center">
+                      <div className="text-4xl mb-2">{option.emoji}</div>
+                      <div className="font-medium">{option.label}</div>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        {option.description}
+                      </p>
+                    </CardContent>
+                  </Card>
+                ))}
               </div>
 
               <div className="text-center">
