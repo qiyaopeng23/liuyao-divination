@@ -308,7 +308,7 @@ export const GUA_64_DATA: Record<string, Omit<GuaInfo, 'binary'>> = {
   // ===== 乾宫 =====
   '111111': { name: '乾为天', sequence: 1, upperGua: '乾', lowerGua: '乾', palace: '乾', worldPosition: 6, responsePosition: 3, wuXing: '金' },
   '111110': { name: '天风姤', sequence: 2, upperGua: '乾', lowerGua: '巽', palace: '乾', worldPosition: 1, responsePosition: 4, wuXing: '金' },
-  '111100': { name: '天山遁', sequence: 3, upperGua: '乾', lowerGua: '艮', palace: '乾', worldPosition: 2, responsePosition: 5, wuXing: '金' },
+  '111001': { name: '天山遁', sequence: 3, upperGua: '乾', lowerGua: '艮', palace: '乾', worldPosition: 2, responsePosition: 5, wuXing: '金' },
   '111000': { name: '天地否', sequence: 4, upperGua: '乾', lowerGua: '坤', palace: '乾', worldPosition: 3, responsePosition: 6, wuXing: '金' },
   '110000': { name: '风地观', sequence: 5, upperGua: '巽', lowerGua: '坤', palace: '乾', worldPosition: 4, responsePosition: 1, wuXing: '金' },
   '100000': { name: '山地剥', sequence: 6, upperGua: '艮', lowerGua: '坤', palace: '乾', worldPosition: 5, responsePosition: 2, wuXing: '金' },
@@ -327,7 +327,7 @@ export const GUA_64_DATA: Record<string, Omit<GuaInfo, 'binary'>> = {
 
   // ===== 离宫 =====
   '101101': { name: '离为火', sequence: 17, upperGua: '离', lowerGua: '离', palace: '离', worldPosition: 6, responsePosition: 3, wuXing: '火' },
-  '101100': { name: '火山旅', sequence: 18, upperGua: '离', lowerGua: '艮', palace: '离', worldPosition: 1, responsePosition: 4, wuXing: '火' },
+  '101001': { name: '火山旅', sequence: 18, upperGua: '离', lowerGua: '艮', palace: '离', worldPosition: 1, responsePosition: 4, wuXing: '火' },
   '101110': { name: '火风鼎', sequence: 19, upperGua: '离', lowerGua: '巽', palace: '离', worldPosition: 2, responsePosition: 5, wuXing: '火' },
   '101011': { name: '火水未济', sequence: 20, upperGua: '离', lowerGua: '坎', palace: '离', worldPosition: 3, responsePosition: 6, wuXing: '火' },
   '100011': { name: '山水蒙', sequence: 21, upperGua: '艮', lowerGua: '坎', palace: '离', worldPosition: 4, responsePosition: 1, wuXing: '火' },
@@ -352,7 +352,7 @@ export const GUA_64_DATA: Record<string, Omit<GuaInfo, 'binary'>> = {
   '110100': { name: '风雷益', sequence: 36, upperGua: '巽', lowerGua: '震', palace: '巽', worldPosition: 3, responsePosition: 6, wuXing: '木' },
   '111100': { name: '天雷无妄', sequence: 37, upperGua: '乾', lowerGua: '震', palace: '巽', worldPosition: 4, responsePosition: 1, wuXing: '木' },
   '101100': { name: '火雷噬嗑', sequence: 38, upperGua: '离', lowerGua: '震', palace: '巽', worldPosition: 5, responsePosition: 2, wuXing: '木' },
-  '100100': { name: '山雷颐', sequence: 39, upperGua: '艮', lowerGua: '震', palace: '巽', worldPosition: 4, responsePosition: 1, wuXing: '木' },
+  '100001': { name: '山雷颐', sequence: 39, upperGua: '艮', lowerGua: '震', palace: '巽', worldPosition: 4, responsePosition: 1, wuXing: '木' },
   '100110': { name: '山风蛊', sequence: 40, upperGua: '艮', lowerGua: '巽', palace: '巽', worldPosition: 3, responsePosition: 6, wuXing: '木' },
 
   // ===== 坎宫 =====
@@ -373,7 +373,7 @@ export const GUA_64_DATA: Record<string, Omit<GuaInfo, 'binary'>> = {
   '101010': { name: '火泽睽', sequence: 53, upperGua: '离', lowerGua: '兑', palace: '艮', worldPosition: 4, responsePosition: 1, wuXing: '土' },
   '111010': { name: '天泽履', sequence: 54, upperGua: '乾', lowerGua: '兑', palace: '艮', worldPosition: 5, responsePosition: 2, wuXing: '土' },
   '110010': { name: '风泽中孚', sequence: 55, upperGua: '巽', lowerGua: '兑', palace: '艮', worldPosition: 4, responsePosition: 1, wuXing: '土' },
-  '110100': { name: '风山渐', sequence: 56, upperGua: '巽', lowerGua: '艮', palace: '艮', worldPosition: 3, responsePosition: 6, wuXing: '土' },
+  '110001': { name: '风山渐', sequence: 56, upperGua: '巽', lowerGua: '艮', palace: '艮', worldPosition: 3, responsePosition: 6, wuXing: '土' },
 
   // ===== 坤宫 =====
   '000000': { name: '坤为地', sequence: 57, upperGua: '坤', lowerGua: '坤', palace: '坤', worldPosition: 6, responsePosition: 3, wuXing: '土' },
@@ -385,11 +385,6 @@ export const GUA_64_DATA: Record<string, Omit<GuaInfo, 'binary'>> = {
   '010111': { name: '水天需', sequence: 63, upperGua: '坎', lowerGua: '乾', palace: '坤', worldPosition: 4, responsePosition: 1, wuXing: '土' },
   '010000': { name: '水地比', sequence: 64, upperGua: '坎', lowerGua: '坤', palace: '坤', worldPosition: 3, responsePosition: 6, wuXing: '土' },
 };
-
-// 注意：艮为山在上面出现了两次（序号49和序号39的山雷颐用了错误的binary）
-// 这里需要修正 - 艮为山的 binary 是 '100100'，已在序号49正确定义
-// 序号39 山雷颐 的 binary 应该是 '100001' - 但上面错误使用了 '100100'
-
 // ==================== 用神取法规则 ====================
 
 /**
