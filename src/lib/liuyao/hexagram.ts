@@ -51,7 +51,7 @@ export function flipCoin(): 2 | 3 {
  */
 export function throwCoins(): { sum: number; yaoState: YaoState } {
   const coins = [flipCoin(), flipCoin(), flipCoin()];
-  const sum = coins.reduce((a, b) => a + b, 0) as 6 | 7 | 8 | 9;
+  const sum = coins.reduce<number>((a, b) => a + b, 0) as 6 | 7 | 8 | 9;
 
   return {
     sum,

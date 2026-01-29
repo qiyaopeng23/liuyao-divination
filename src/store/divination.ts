@@ -83,7 +83,7 @@ export const useDivinationStore = create<DivinationState>((set, get) => ({
     // 每3次投币决定一爻
     if (newCoinResults.length % 3 === 0) {
       const lastThree = newCoinResults.slice(-3);
-      const sum = lastThree.reduce((a, b) => a + b, 0) as 6 | 7 | 8 | 9;
+      const sum = lastThree.reduce<number>((a, b) => a + b, 0) as 6 | 7 | 8 | 9;
       const yaoState = coinResultToYaoState(sum);
 
       const newYaoStates = [...yaoStates, yaoState];
