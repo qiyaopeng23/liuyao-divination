@@ -98,7 +98,7 @@ export const ThreeCoins: React.FC<ThreeCoinsProps> = ({ onComplete, yaoIndex }) 
 
     // 检查是否三枚都投完
     if (newResults.filter(r => r !== undefined).length === 3) {
-      const sum = newResults.reduce((a, b) => a + b, 0) as 6 | 7 | 8 | 9;
+      const sum = newResults.reduce<number>((a, b) => a + b, 0) as 6 | 7 | 8 | 9;
       setIsComplete(true);
 
       // 延迟回调，让动画完成
